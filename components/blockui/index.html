@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <title data-react-helmet="true">React Block UI - BlockUi</title>
+          <meta data-react-helmet="true" name="description" content="React Block UI - easy to use form validation for reactstrap"/><meta data-react-helmet="true" property="og:type" content="article"/>
+          <link rel=icon href="/react-block-ui/assets/favicon.ico">
+          <link rel="stylesheet" href="/react-block-ui/assets/style.css"/>
+          <link rel="stylesheet" href="/react-block-ui/assets/docs.css"/>
+        </head>
+        <body>
+          <div id="app"><div class="wrapper" data-reactroot="" data-reactid="1" data-react-checksum="-876061230"><!-- react-empty: 2 --><nav role="navigation" class="header navbar navbar-light bg-faded" data-reactid="3"><div class="container-fluid" data-reactid="4"><a class="navbar-brand" href="/react-block-ui/" data-reactid="5">React Block UI</a><ul class="nav navbar-nav pull-xs-right nav" data-reactid="6"><li class="nav-item" data-reactid="7"><a class="nav-link nav-link active" href="/react-block-ui/components/" data-reactid="8">Components</a></li><li class="nav-item" data-reactid="9"><a href="https://github.com/availity/react-block-ui" class="nav-link" data-reactid="10">Github</a></li></ul></div></nav><div class="content container-fluid" data-reactid="11"><div class="row" data-reactid="12"><div class="col-xs-12 col-md-3 push-md-9" data-reactid="13"><div class="docs-sidebar m-b-3" data-reactid="14"><h5 data-reactid="15">Components</h5><ul class="nav" data-reactid="16"><li class="nav-item" data-reactid="17"><a class="nav-link active" href="/react-block-ui/components/blockui/" data-reactid="18">BlockUi</a></li><li class="nav-item" data-reactid="19"><a class="nav-link" href="/react-block-ui/components/reduxblockui/" data-reactid="20">ReduxBlockUi</a></li><li class="nav-item" data-reactid="21"><a class="nav-link" href="/react-block-ui/components/loader/" data-reactid="22">Loader</a></li></ul></div></div><div class="col-xs-12 col-md-9 pull-md-3" data-reactid="23"><div data-reactid="24"><!-- react-empty: 25 --><h3 data-reactid="26">BlockUi</h3><p data-reactid="27"><!-- react-text: 28 -->This is the basic ability. Wrap a section with the <!-- /react-text --><code data-reactid="29">BlockUi</code><!-- react-text: 30 --> component and set the <!-- /react-text --><code data-reactid="31">blocking</code><!-- react-text: 32 -->prop to <!-- /react-text --><code data-reactid="33">true</code><!-- react-text: 34 --> to block the UI/children (and show the loader) or <!-- /react-text --><code data-reactid="35">false</code><!-- react-text: 36 --> to allow user interaction with the UI/children.<!-- /react-text --></p><div class="docs-example" data-reactid="37"><div data-reactid="38"><div data-reactid="39"><p data-reactid="40">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p data-reactid="41">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div><button class="btn btn-primary" data-reactid="42">Toggle Block</button></div></div><pre data-reactid="43"><code class="language-jsx" data-reactid="44">import React from &#x27;react&#x27;;
+import { Button } from &#x27;reactstrap&#x27;;
+import BlockUi from &#x27;react-block-ui&#x27;;
+import &#x27;react-block-ui/style.css&#x27;;
+
+export default class Example extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleBlocking = this.toggleBlocking.bind(this);
+    this.state = {
+      blocking: false,
+    };
+  }
+
+  toggleBlocking() {
+    this.setState({blocking: !this.state.blocking});
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;BlockUi tag=&quot;div&quot; blocking={this.state.blocking}&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+        &lt;/BlockUi&gt;
+        &lt;Button onClick={this.toggleBlocking}&gt;Toggle Block&lt;/Button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre><h3 data-reactid="45">Do not render children while blocking</h3><p data-reactid="46"><!-- react-text: 47 -->Setting the <!-- /react-text --><code data-reactid="48">renderChildren</code><!-- react-text: 49 --> prop to <!-- /react-text --><code data-reactid="50">false</code><!-- react-text: 51 --> will prevent the children from rendering while blocking. This is useful when the children depend on information which is still loading and would provide a poor user experience if rendered without the data which is still being requested/loading.<!-- /react-text --></p><div class="docs-example" data-reactid="52"><div data-reactid="53"><div data-reactid="54"><p data-reactid="55">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p data-reactid="56">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div><button class="btn btn-primary" data-reactid="57">Toggle Block</button></div></div><pre data-reactid="58"><code class="language-jsx" data-reactid="59">import React from &#x27;react&#x27;;
+import { Button } from &#x27;reactstrap&#x27;;
+import BlockUi from &#x27;react-block-ui&#x27;;
+import &#x27;react-block-ui/style.css&#x27;;
+
+export default class Example extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleBlocking = this.toggleBlocking.bind(this);
+    this.state = {
+      blocking: false,
+    };
+  }
+
+  toggleBlocking() {
+    this.setState({blocking: !this.state.blocking});
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;BlockUi tag=&quot;div&quot; blocking={this.state.blocking} renderChildren={false}&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+        &lt;/BlockUi&gt;
+        &lt;Button onClick={this.toggleBlocking}&gt;Toggle Block&lt;/Button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre></div></div></div></div><div class="footer" data-reactid="60"><div class="container-fluid" data-reactid="61"><div class="row" data-reactid="62"><div class="text-xs-center col-xs-12" data-reactid="63"><p class="social" data-reactid="64"><!-- react-text: 65 -->© 2016 Availity<!-- /react-text --><!-- react-text: 66 --> <!-- /react-text --><iframe src="https://ghbtns.com/github-btn.html?user=availity&amp;repo=react-block-ui&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="100" height="20px" data-reactid="67"></iframe><iframe src="https://ghbtns.com/github-btn.html?user=availity&amp;repo=react-block-ui&amp;type=fork&amp;count=true" frameborder="0" scrolling="0" width="100" height="20px" data-reactid="68"></iframe></p></div></div></div></div></div></div>
+          <script src="/react-block-ui/assets/prism.js" data-manual></script>
+          <script>window.basename = '/react-block-ui';</script>
+          <script src="/react-block-ui/bundle.js"></script>
+        </body>
+      </html>

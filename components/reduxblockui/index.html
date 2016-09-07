@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <title data-react-helmet="true">React Block UI - ReduxBlockUi</title>
+          <meta data-react-helmet="true" name="description" content="React Block UI - easy to use form validation for reactstrap"/><meta data-react-helmet="true" property="og:type" content="article"/>
+          <link rel=icon href="/react-block-ui/assets/favicon.ico">
+          <link rel="stylesheet" href="/react-block-ui/assets/style.css"/>
+          <link rel="stylesheet" href="/react-block-ui/assets/docs.css"/>
+        </head>
+        <body>
+          <div id="app"><div class="wrapper" data-reactroot="" data-reactid="1" data-react-checksum="1373337050"><!-- react-empty: 2 --><nav role="navigation" class="header navbar navbar-light bg-faded" data-reactid="3"><div class="container-fluid" data-reactid="4"><a class="navbar-brand" href="/react-block-ui/" data-reactid="5">React Block UI</a><ul class="nav navbar-nav pull-xs-right nav" data-reactid="6"><li class="nav-item" data-reactid="7"><a class="nav-link nav-link active" href="/react-block-ui/components/" data-reactid="8">Components</a></li><li class="nav-item" data-reactid="9"><a href="https://github.com/availity/react-block-ui" class="nav-link" data-reactid="10">Github</a></li></ul></div></nav><div class="content container-fluid" data-reactid="11"><div class="row" data-reactid="12"><div class="col-xs-12 col-md-3 push-md-9" data-reactid="13"><div class="docs-sidebar m-b-3" data-reactid="14"><h5 data-reactid="15">Components</h5><ul class="nav" data-reactid="16"><li class="nav-item" data-reactid="17"><a class="nav-link" href="/react-block-ui/components/blockui/" data-reactid="18">BlockUi</a></li><li class="nav-item" data-reactid="19"><a class="nav-link active" href="/react-block-ui/components/reduxblockui/" data-reactid="20">ReduxBlockUi</a></li><li class="nav-item" data-reactid="21"><a class="nav-link" href="/react-block-ui/components/loader/" data-reactid="22">Loader</a></li></ul></div></div><div class="col-xs-12 col-md-9 pull-md-3" data-reactid="23"><div data-reactid="24"><!-- react-empty: 25 --><h3 data-reactid="26">ReduxBlockUi</h3><p data-reactid="27">This is an advanced feature which is opinionated to work specifically with react-redux. It involves a little more setup as it depends on middleware being used in the redux store. The middleware is provided and only needs to be registered (see below).</p><p data-reactid="28"><!-- react-text: 29 -->Notice the import is coming from a separate file directly; <!-- /react-text --><code data-reactid="30">import ReduxBlockUi from &#x27;react-block-ui/redux&#x27;</code><!-- react-text: 31 -->. This is done to keep the standard library light for the developers who only want <!-- /react-text --><code data-reactid="32">BlockUi</code><!-- react-text: 33 --> and do not use redux and/or do not want <!-- /react-text --><code data-reactid="34">ReduxBlockUi</code><!-- react-text: 35 -->.<!-- /react-text --></p><div class="docs-example" data-reactid="36"><div data-reactid="37"><div data-reactid="38"><p data-reactid="39">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p data-reactid="40">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div><button class="btn btn-primary" data-reactid="41">Request Start</button><button class="btn btn-success" data-reactid="42">Request Success</button><button class="btn btn-danger" data-reactid="43">Request Failure</button><button class="btn btn-outline-secondary" data-reactid="44">Other Action</button><p data-reactid="45"><!-- react-text: 46 -->Number of pending requests: <!-- /react-text --><!-- react-text: 47 -->0<!-- /react-text --></p><div style="max-height:125px;overflow:auto;" data-reactid="48"><div data-reactid="49"><!-- react-text: 50 -->1<!-- /react-text --><!-- react-text: 51 --> <!-- /react-text --><!-- react-text: 52 -->{&quot;type&quot;:&quot;@@redux/INIT&quot;}<!-- /react-text --></div></div></div></div><pre data-reactid="53"><code class="language-jsx" data-reactid="54">import React from &#x27;react&#x27;;
+import { Button } from &#x27;reactstrap&#x27;;
+import { connect } from &#x27;react-redux&#x27;;
+import ReduxBlockUi from &#x27;react-block-ui/redux&#x27;;
+import &#x27;react-block-ui/style.css&#x27;;
+
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onBlockingChangeHandler = this.onBlockingChangeHandler.bind(this);
+    this.state = {
+      blockers: 0,
+    };
+  }
+
+  // this is just for show, but demonstrates how you can get the number of &#x27;blockers&#x27; for a given ReduxBlockUi component
+  onBlockingChangeHandler(newValue, oldValue) {
+    this.setState({blockers: newValue});
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;ReduxBlockUi tag=&quot;div&quot; block=&quot;REQUEST_START&quot; unblock={[&quot;REQUEST_SUCCESS&quot;, /fail/i]} onChange={this.onBlockingChangeHandler}&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+        &lt;/ReduxBlockUi&gt;
+
+        {/* the rest is for the demo, to allow you to trigger redux actions and see the actions, this would usually be done by some API calls or something */}
+        &lt;Button onClick={this.props.requestStart}&gt;Request Start&lt;/Button&gt;
+        &lt;Button color=&quot;success&quot; onClick={this.props.requestSuccess}&gt;Request Success&lt;/Button&gt;
+        &lt;Button color=&quot;danger&quot; onClick={this.props.requestFailure}&gt;Request Failure&lt;/Button&gt;
+        &lt;Button outline color=&quot;secondary&quot; onClick={this.props.otherAction}&gt;Other Action&lt;/Button&gt;
+        &lt;p&gt;Number of pending requests: {this.state.blockers}&lt;/p&gt;
+        &lt;div style={{maxHeight: &#x27;125px&#x27;, overflow: &#x27;auto&#x27;}}&gt;
+          {this.props.actions.map((action, i) =&gt;
+            &lt;div key={`action_${i}`}&gt;{this.props.actions.length - i} {JSON.stringify(action)}&lt;/div&gt;
+          )}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+Example.propTypes = {
+  requestStart: React.PropTypes.func,
+  requestSuccess: React.PropTypes.func,
+  requestFailure: React.PropTypes.func,
+  otherAction: React.PropTypes.func,
+  actions: React.PropTypes.array,
+};
+
+const forExampleOnly = type =&gt; () =&gt; ({ type });
+
+export default connect(state =&gt; state, {
+  requestStart: forExampleOnly(&#x27;REQUEST_START&#x27;),
+  requestSuccess: forExampleOnly(&#x27;REQUEST_SUCCESS&#x27;),
+  requestFailure: forExampleOnly(&#x27;REQUEST_FAILURE&#x27;),
+  otherAction: forExampleOnly(&#x27;SOMETHING_ELSE&#x27;),
+})(Example);
+</code></pre><h4 data-reactid="55">Properties</h4><p data-reactid="56"><code data-reactid="57">block</code><!-- react-text: 58 --> and <!-- /react-text --><code data-reactid="59">unblock</code><!-- react-text: 60 --> are the main props here, <!-- /react-text --><code data-reactid="61">blocking</code><!-- react-text: 62 --> is just a passthrough to allow you to force the blocking UI to show. Both <!-- /react-text --><code data-reactid="63">block</code><!-- react-text: 64 --> and <!-- /react-text --><code data-reactid="65">unblock</code><!-- react-text: 66 --> props accept a string which will be compared to the redux action&#x27;s type, a RegExp which will be <!-- /react-text --><code data-reactid="67">test</code><!-- react-text: 68 -->ed against the redux action&#x27;s type. You can all pass a function which will be executed passing the entire action. The function must return <!-- /react-text --><code data-reactid="69">true</code><!-- react-text: 70 --> for the block or unbock to happend (depending on which prop the function is passed to). Finally, you can pass an array containing any combination of those things.<!-- /react-text --></p><pre data-reactid="71"><code class="language-jsx" data-reactid="72">ReduxBlockUi.propTypes = {
+  blocking: PropTypes.bool,
+  block: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
+  unblock: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
+  onChange: PropTypes.func,
+};</code></pre><h3 data-reactid="73">BlockUiMiddleware</h3><p data-reactid="74"><!-- react-text: 75 -->This is the middleware piece which is key to allowing <!-- /react-text --><code data-reactid="76">ReduxBlockUi</code><!-- react-text: 77 --> to work the way it does. Here is an example of how you might apply the middleware and where to import it from.<!-- /react-text --></p><pre data-reactid="78"><code class="language-jsx" data-reactid="79">import { applyMiddleware, createStore, combineReducers } from &#x27;redux&#x27;;
+import { BlockUiMiddleware } from &#x27;react-block-ui/redux&#x27;;
+//import reducers from &#x27;./reducers&#x27;;
+const reducers = {actions: (state = [], payload) =&gt; [payload, ...state]};
+
+const reducer = combineReducers(reducers);
+const createStoreWithMiddleware = applyMiddleware(BlockUiMiddleware)(createStore);
+
+export default function configureStore(initialState) {
+  return createStoreWithMiddleware(reducer, initialState);
+}
+</code></pre></div></div></div></div><div class="footer" data-reactid="80"><div class="container-fluid" data-reactid="81"><div class="row" data-reactid="82"><div class="text-xs-center col-xs-12" data-reactid="83"><p class="social" data-reactid="84"><!-- react-text: 85 -->© 2016 Availity<!-- /react-text --><!-- react-text: 86 --> <!-- /react-text --><iframe src="https://ghbtns.com/github-btn.html?user=availity&amp;repo=react-block-ui&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="100" height="20px" data-reactid="87"></iframe><iframe src="https://ghbtns.com/github-btn.html?user=availity&amp;repo=react-block-ui&amp;type=fork&amp;count=true" frameborder="0" scrolling="0" width="100" height="20px" data-reactid="88"></iframe></p></div></div></div></div></div></div>
+          <script src="/react-block-ui/assets/prism.js" data-manual></script>
+          <script>window.basename = '/react-block-ui';</script>
+          <script src="/react-block-ui/bundle.js"></script>
+        </body>
+      </html>
