@@ -1,0 +1,6 @@
+/__test__/coverage
+node_modules
+/dist
+/build
+/lib
+/.tmp

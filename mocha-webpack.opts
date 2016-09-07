@@ -1,0 +1,6 @@
+--colors
+--require __test__/.setup.js
+--webpack-config webpack.test.config.js
+--timeout 0
+--inline-diffs
+__test__/**/*.spec.js

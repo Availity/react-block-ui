@@ -1,0 +1,15 @@
+{
+  "presets": ["es2015-loose", "stage-0", "react"],
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          "exclude": [
+            "**/*.spec.js",
+            ".tmp/**/*"
+          ]
+        }]
+      ]
+    }
+  }
+}

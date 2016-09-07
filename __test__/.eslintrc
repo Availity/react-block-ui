@@ -1,0 +1,15 @@
+{
+  "extends" : "eslint-config-availity/react",
+  "env": {
+    "mocha": true,
+    "node": true
+  },
+  "globals": {
+    "sinon": true,
+    "expect": true
+  },
+  "rules": {
+    "semi" : [2, "always"],
+    "comma-dangle": [2, "always-multiline"]
+  }
+}
