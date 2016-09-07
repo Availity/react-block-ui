@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Availity/react-block-ui.svg?branch=master)](https://travis-ci.org/Availity/react-block-ui) [![Coverage Status](https://coveralls.io/repos/github/Availity/react-block-ui/badge.svg?branch=master)](https://coveralls.io/github/Availity/react-block-ui?branch=master)
+[![npm version](https://badge.fury.io/js/react-block-ui.svg)](https://badge.fury.io/js/react-block-ui) [![Build Status](https://travis-ci.org/Availity/react-block-ui.svg?branch=master)](https://travis-ci.org/Availity/react-block-ui) [![Coverage Status](https://coveralls.io/repos/github/Availity/react-block-ui/badge.svg?branch=master)](https://coveralls.io/github/Availity/react-block-ui?branch=master)
 # react-block-ui
 Easy way to block the user from interacting with your UI.
 
@@ -15,17 +15,15 @@ See: [https://availity.github.io/react-block-ui/](https://availity.github.io/rea
 Install `react-block-ui` via NPM
 
 ```sh
-npm install --save react-block-ui
+npm install --save react-block-ui react-addons-transition-group react react-dom
 ```
 
 Import the components you need, example:
 
 ```js
-import BlockUi from 'react-block-ui';
-```
--OR-
-```js
-import ReduxBlockUi from 'react-block-ui/redux';
+import BlockUi, { Loader } from 'react-block-ui';
+import ReduxBlockUi, { BlockUiMiddleware } from 'react-block-ui/redux';
+import from 'react-block-ui/style.css';
 ```
 
 ## Development
