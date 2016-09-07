@@ -9,8 +9,8 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "ci": "cross-env BABEL_ENV=test nyc mocha-webpack && coveralls < ./__test__/coverage/lcov.info",
-    "test:coverage": "cross-env BABEL_ENV=test nyc mocha-webpack && npm run cleanup",
+    "coveralls": "coveralls < ./__test__/coverage/lcov.info",
+    "test:coverage": "cross-env BABEL_ENV=test nyc mocha-webpack",
     "test": "mocha-webpack && npm run cleanup",
     "test:watch": "mocha-webpack --watch && npm run cleanup",
     "cleanup": "rimraf .nyc_output .tmp",
