@@ -93,7 +93,7 @@
     "ejs": "^2.4.1",
     "enzyme": "^2.4.1",
     "eslint": "^3.3.1",
-    "eslint-config-availity": "github:availity/eslint-config-availity#feature/react",
+    "eslint-config-availity": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "history": "^2.0.0",
