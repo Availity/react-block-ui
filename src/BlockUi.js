@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import Loader from './Loader';
+import DefaultLoader from './Loader';
 
 class BlockUi extends Component {
   static propTypes = {
@@ -8,6 +8,11 @@ class BlockUi extends Component {
     children: PropTypes.node,
     renderChildren: PropTypes.bool,
     className: PropTypes.string,
+    loader: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func,
+      PropTypes.node,
+    ]),
     tag: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func,
@@ -17,6 +22,7 @@ class BlockUi extends Component {
   static defaultProps = {
     tag: 'div',
     renderChildren: true,
+    loader: DefaultLoader,
   };
 
   render () {
@@ -25,6 +31,7 @@ class BlockUi extends Component {
       blocking,
       className,
       children,
+      loader: Loader,
       renderChildren,
       ...attributes
     } = this.props;
@@ -34,7 +41,6 @@ class BlockUi extends Component {
         'av-block-ui',
         className
       );
-
       return (
         <Tag {...attributes} className={classes}>
           {renderChildren && children}
@@ -42,7 +48,7 @@ class BlockUi extends Component {
             <div className="av-block-ui-overlay"></div>
             <div className="av-block-ui-message-container">
               <div className="av-block-ui-message">
-                <Loader />
+                {React.isValidElement(Loader) ? Loader : <Loader />}
               </div>
             </div>
           </div>

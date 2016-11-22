@@ -28,10 +28,10 @@ class Example extends React.Component {
         </ReduxBlockUi>
 
         {/* the rest is for the demo, to allow you to trigger redux actions and see the actions, this would usually be done by some API calls or something */}
-        <Button onClick={this.props.requestStart}>Request Start</Button>
+        <Button color="primary" onClick={this.props.requestStart}>Request Start</Button>
         <Button color="success" onClick={this.props.requestSuccess}>Request Success</Button>
         <Button color="danger" onClick={this.props.requestFailure}>Request Failure</Button>
-        <Button outline color="secondary" onClick={this.props.otherAction}>Other Action</Button>
+        <Button outline onClick={this.props.otherAction}>Other Action</Button>
         <p>Number of pending requests: {this.state.blockers}</p>
         <div style={{maxHeight: '125px', overflow: 'auto'}}>
           {this.props.actions.map((action, i) =>

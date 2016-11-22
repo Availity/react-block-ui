@@ -21,6 +21,10 @@
     }
 }
 
+.loader-inner {
+    display: inline-block;
+}
+
 .content {
     margin-top: 2rem;
 }

@@ -9,7 +9,7 @@ const importBasic = require('!!raw!../examples/import-basic.js');
 export default () => {
   return (
     <div>
-      <section className="jumbotron text-xs-center m-b-3">
+      <section className="jumbotron text-xs-center mb-3">
         <Container fluid>
           <Row>
             <Col>
@@ -54,7 +54,7 @@ export default () => {
               </PrismCode>
             </pre>
             <p>Check out the demo <a href="http://output.jsbin.com/dimive/latest">here</a></p>*/}
-            <h2 className="m-t-3">About the Project</h2>
+            <h2 className="mt-3">About the Project</h2>
             <hr/>
             <p>This library contains easy to use components to prevent the user from interacting with the user interface based on some conditions.</p>
             <p>There is also a separate component which works with redux to help block and unblock automatically based on redux action types. See the <Link to="/components/ReduxBlockUi/">ReduxBlockUi</Link> component for more details.</p>

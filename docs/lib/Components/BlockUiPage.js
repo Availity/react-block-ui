@@ -5,6 +5,8 @@ import Helmet from 'react-helmet';
 
 import BlockUiExample from '../examples/BlockUi';
 const BlockUiExampleSource = require('!!raw!../examples/BlockUi.js');
+import BlockUiCustomLoaderExample from '../examples/BlockUiCustomLoader';
+const BlockUiCustomLoaderExampleSource = require('!!raw!../examples/BlockUiCustomLoader.js');
 import BlockUiNoChildrenExample from '../examples/BlockUiNoChildren';
 const BlockUiNoChildrenExampleSource = require('!!raw!../examples/BlockUiNoChildren.js');
 
@@ -25,6 +27,23 @@ export default class BlockUiPage extends React.Component {
         <pre>
           <PrismCode className="language-jsx">
             {BlockUiExampleSource}
+          </PrismCode>
+        </pre>
+
+        <h3>Using external/custom loader</h3>
+        <p>
+          You do not have to use the default loader that comes with this library, you can pass anything you want. Pass JSX
+          to render or a component to the <code>loader</code> prop to use it. In the exmaple below, we are using the fancy
+          {' '}<a href="https://github.com/ConnorAtherton/loaders.css">Loaders.css</a> via the convenient{' '}
+          <a href="https://github.com/jonjaques/react-loaders">react-loaders</a> library. Use the select input to change
+          the loader you see.
+        </p>
+        <div className="docs-example">
+          <BlockUiCustomLoaderExample />
+        </div>
+        <pre>
+          <PrismCode className="language-jsx">
+            {BlockUiCustomLoaderExampleSource}
           </PrismCode>
         </pre>
 

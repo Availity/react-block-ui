@@ -12,10 +12,10 @@ const routes = (
   <Route path="/" component={ UI.Layout }>
     <IndexRoute component={ Home } />
     <Route path="/components/" component={Components}>
-      <IndexRedirect to="BlockUi/" />
-      <Route path="BlockUi/" component={ BlockUiPage } />
-      <Route path="ReduxBlockUi/" component={ ReduxBlockUiPage } />
-      <Route path="Loader/" component={ LoaderPage } />
+      <IndexRedirect to="blockui/" />
+      <Route path="blockui/" component={ BlockUiPage } />
+      <Route path="reduxblockui/" component={ ReduxBlockUiPage } />
+      <Route path="loader/" component={ LoaderPage } />
     </Route>
     <Route path="*" component={NotFound} />
   </Route>

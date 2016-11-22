@@ -108,10 +108,30 @@ describe('BlockUi', function() {
       expect(message.hasClass('av-block-ui-message')).to.be.true;
     });
 
-    it('should append "Loader"', () => {
-      const message = shallow(<BlockUi blocking>Yo!</BlockUi>).childAt(1).childAt(1).childAt(0).childAt(0);
+    describe('the loader', () => {
+      it('should append the Loader', () => {
+        const message = shallow(<BlockUi blocking>Yo!</BlockUi>).childAt(1).childAt(1).childAt(0).childAt(0);
 
-      expect(message.type()).to.equal(Loader);
+        expect(message.type()).to.equal(Loader);
+      });
+
+      it('should append a custom Loader (element) if provided', () => {
+        const message = shallow(<BlockUi blocking loader={<span/>}>Yo!</BlockUi>).childAt(1).childAt(1).childAt(0).childAt(0);
+
+        expect(message.type()).to.equal('span');
+      });
+
+      it('should append a custom Loader (string) if provided', () => {
+        const message = shallow(<BlockUi blocking loader="span">Yo!</BlockUi>).childAt(1).childAt(1).childAt(0).childAt(0);
+
+        expect(message.type()).to.equal('span');
+      });
+
+      it('should append a custom Loader (component) if provided', () => {
+        const message = shallow(<BlockUi blocking loader={Loader}>Yo!</BlockUi>).childAt(1).childAt(1).childAt(0).childAt(0);
+
+        expect(message.type()).to.equal(Loader);
+      });
     });
 
     describe('renderChildren is false', () => {
