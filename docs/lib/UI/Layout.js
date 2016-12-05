@@ -12,10 +12,10 @@ export default (props) => {
     <div className="wrapper">
       <Helmet
         titleTemplate="React Block UI - %s"
-        title="Form Validation for reactstrap"
-        defaultTitle="Form Validation for reactstrap"
+        title="Block the user from interacting with your UI"
+        defaultTitle="Block the user from interacting with your UI"
         meta={[
-            {"name": "description", "content": "React Block UI - easy to use form validation for reactstrap"},
+            {"name": "description", "content": "React Block UI - easy way to block the user from interacting with your UI."},
             {"property": "og:type", "content": "article"}
         ]}/>
       <Nav/>
