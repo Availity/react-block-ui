@@ -13,7 +13,7 @@ describe('BlockUi', function() {
     it('should render children', () => {
       const wrapper = shallow(<BlockUi>Yo!</BlockUi>);
 
-      expect(wrapper.prop('children')).to.equal('Yo!');
+      expect(wrapper.prop('children')[0]).to.equal('Yo!');
     });
 
     it('should render with the props passed in', () => {

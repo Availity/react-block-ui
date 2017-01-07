@@ -36,27 +36,24 @@ class BlockUi extends Component {
       ...attributes
     } = this.props;
 
-    if (blocking) {
-      const classes = classNames(
-        'av-block-ui',
-        className
-      );
-      return (
-        <Tag {...attributes} className={classes}>
-          {renderChildren && children}
-          <div className="av-block-ui-container">
-            <div className="av-block-ui-overlay"></div>
-            <div className="av-block-ui-message-container">
-              <div className="av-block-ui-message">
-                {React.isValidElement(Loader) ? Loader : <Loader />}
-              </div>
+    const classes = blocking ? classNames('av-block-ui', className) : className;
+    const renderChilds = !blocking || renderChildren;
+
+    return (
+      <Tag {...attributes} className={classes}>
+        {renderChilds && children}
+        {blocking &&
+        <div className="av-block-ui-container">
+          <div className="av-block-ui-overlay"></div>
+          <div className="av-block-ui-message-container">
+            <div className="av-block-ui-message">
+              {React.isValidElement(Loader) ? Loader : <Loader />}
             </div>
           </div>
-        </Tag>
-      );
-    }
-
-    return (<Tag {...attributes} className={className}>{children}</Tag>);
+        </div>
+        }
+      </Tag>
+    );
   }
 }
 
