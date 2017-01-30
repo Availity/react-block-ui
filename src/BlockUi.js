@@ -25,6 +25,57 @@ class BlockUi extends Component {
     loader: DefaultLoader,
   };
 
+  blockingTab (e, withShift = false) {
+    return this.props.blocking && (e.key === 'Tab' || e.keyCode === 9) && e.shiftKey == withShift;
+  }
+
+  tabbedUpTop = e => {
+    if (this.blockingTab(e)) {
+      this.blocker.focus();
+    }
+  };
+
+  tabbedDownTop = e => {
+    if (this.blockingTab(e)) {
+      e.preventDefault();
+      this.blocker.focus();
+    }
+  };
+
+  tabbedUpBottom = e => {
+    if (this.blockingTab(e, true)) {
+        this.topFocus.focus();
+    }
+  };
+
+  tabbedDownBottom = e => {
+    if (this.blockingTab(e, true)) {
+      e.preventDefault();
+      this.topFocus.focus();
+    }
+  };
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.blocking !== this.props.blocking){
+      if (nextProps.blocking) {
+        // blocking started
+        if (this.wrapper && this.wrapper.contains(document.activeElement)) {
+          this.focused = document.activeElement;
+          // https://www.tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#blurring-the-body-switches-windows-in-ie9-and-ie10
+          if(this.focused && this.focused !== document.body) {
+            setImmediate(() => this.topFocus.focus())
+          }
+        }
+      } else {
+        const ae = document.activeElement;
+        if (this.focused && (!ae || ae === document.body || ae === this.topFocus)) {
+          this.focused.focus();
+          this.focused = null;
+        }
+      }
+    }
+  }
+
   render () {
     const {
       tag: Tag,
@@ -40,10 +91,16 @@ class BlockUi extends Component {
     const renderChilds = !blocking || renderChildren;
 
     return (
-      <Tag {...attributes} className={classes}>
+      <Tag {...attributes} className={classes} aria-busy={blocking} ref={c => this.wrapper = c}>
+        {blocking &&
+        <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={c => this.topFocus = c} />}
         {renderChilds && children}
         {blocking &&
-        <div className="av-block-ui-container">
+        <div className="av-block-ui-container"
+          tabIndex="0"
+          ref={c => this.blocker = c}
+          onKeyUp={this.tabbedUpBottom}
+          onKeyDown={this.tabbedDownBottom}>
           <div className="av-block-ui-overlay"></div>
           <div className="av-block-ui-message-container">
             <div className="av-block-ui-message">

@@ -9,6 +9,8 @@ import BlockUiCustomLoaderExample from '../examples/BlockUiCustomLoader';
 const BlockUiCustomLoaderExampleSource = require('!!raw!../examples/BlockUiCustomLoader.js');
 import BlockUiNoChildrenExample from '../examples/BlockUiNoChildren';
 const BlockUiNoChildrenExampleSource = require('!!raw!../examples/BlockUiNoChildren.js');
+import BlockUiFocusExample from '../examples/BlockUiFocus';
+const BlockUiFocusExampleSource = require('!!raw!../examples/BlockUiFocus.js');
 
 export default class BlockUiPage extends React.Component {
   render() {
@@ -44,6 +46,19 @@ export default class BlockUiPage extends React.Component {
         <pre>
           <PrismCode className="language-jsx">
             {BlockUiCustomLoaderExampleSource}
+          </PrismCode>
+        </pre>
+
+        <h3>Focus / Keyboard Navigation</h3>
+        <p>
+          Unlike other block ui libraries, you cannot tab into a blocked area. Just try to trigger a button while blocking. Focus management also is applied. If the active focus was on an element within the blocked area, it will be added back to the element when blocking stops. If the user changes focus during blocking, it will not interrupt their flow.
+        </p>
+        <div className="docs-example">
+          <BlockUiFocusExample />
+        </div>
+        <pre>
+          <PrismCode className="language-jsx">
+            {BlockUiFocusExampleSource}
           </PrismCode>
         </pre>
 

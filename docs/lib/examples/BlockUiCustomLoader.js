@@ -34,7 +34,7 @@ export default class Example extends React.Component {
         </BlockUi>
         <Row>
           <Col xs={12} sm={6}>
-            <Input type="select" onChange={this.setLoaderType}>
+            <Input type="select" onChange={this.setLoaderType} value={this.state.loaderType}>
               {Object.keys(Types).map(type =>
                 <option key={type} value={type}>{type}</option>
               )}
