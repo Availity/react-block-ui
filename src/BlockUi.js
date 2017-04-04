@@ -59,7 +59,8 @@ class BlockUi extends Component {
     if (nextProps.blocking !== this.props.blocking){
       if (nextProps.blocking) {
         // blocking started
-        if (this.wrapper && this.wrapper.contains(document.activeElement)) {
+        if (this.helper && this.helper.parentNode && this.helper.parentNode.contains
+          && this.helper.parentNode.contains(document.activeElement)) {
           this.focused = document.activeElement;
           // https://www.tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#blurring-the-body-switches-windows-in-ie9-and-ie10
           if(this.focused && this.focused !== document.body) {
@@ -91,7 +92,7 @@ class BlockUi extends Component {
     const renderChilds = !blocking || renderChildren;
 
     return (
-      <Tag {...attributes} className={classes} aria-busy={blocking} ref={c => this.wrapper = c}>
+      <Tag {...attributes} className={classes} aria-busy={blocking}>
         {blocking &&
         <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={c => this.topFocus = c} />}
         {renderChilds && children}
@@ -109,6 +110,7 @@ class BlockUi extends Component {
           </div>
         </div>
         }
+        <span ref={c => this.helper = c} />
       </Tag>
     );
   }

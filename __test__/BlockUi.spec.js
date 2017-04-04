@@ -267,11 +267,11 @@ describe('BlockUi', function() {
       it('should store the focused element and focus on the top focus', () => {
         const wrapper = shallow(<BlockUi blocking={false}><input /></BlockUi>);
         const instance = wrapper.instance();
-        instance.wrapper = {contains: sinon.stub().returns(true)};
+        instance.helper = {parentNode: {contains: sinon.stub().returns(true)}};
         wrapper.find('input').simulate('click');
         instance.componentWillReceiveProps({blocking: true});
         expect(instance.focused).to.equal(document.activeElement);
-        expect(instance.wrapper.contains).to.have.been.called;
+        expect(instance.helper.parentNode.contains).to.have.been.called;
       });
     });
   });
