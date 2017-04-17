@@ -9,7 +9,7 @@ const importBasic = require('!!raw!../examples/import-basic.js');
 export default () => {
   return (
     <div>
-      <section className="jumbotron text-xs-center mb-3">
+      <section className="jumbotron text-center mb-3">
         <Container fluid>
           <Row>
             <Col>
@@ -36,7 +36,7 @@ export default () => {
             <h3>NPM</h3>
             <p>Install reactstrap and peer dependencies via NPM</p>
             <pre>
-              <PrismCode className="language-bash">npm install --save react-block-ui react-addons-transition-group react react-dom</PrismCode>
+              <PrismCode className="language-bash">npm install --save react-block-ui react react-dom</PrismCode>
             </pre>
             <p>ES6 - import the components you need</p>
             <div className="docs-example">

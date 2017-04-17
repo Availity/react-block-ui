@@ -117,7 +117,7 @@ describe('Loader', function() {
   describe('enter animation', () => {
     beforeEach(() => {
       this.cancelSpy = sinon.spy();
-      this.animate = sinon.stub(animate, 'default', () => this.cancelSpy);
+      this.animate = sinon.stub(animate, 'default').callsFake(() => this.cancelSpy);
       this.clock = sinon.useFakeTimers();
       this.wrapper = mount(<Loader />);
       this.instance = this.wrapper.instance();
@@ -158,7 +158,7 @@ describe('Loader', function() {
   describe('leave animation', () => {
     beforeEach(() => {
       this.cancelSpy = sinon.spy();
-      this.animate = sinon.stub(animate, 'default', () => this.cancelSpy);
+      this.animate = sinon.stub(animate, 'default').callsFake(() => this.cancelSpy);
       this.clock = sinon.useFakeTimers();
       this.wrapper = mount(<Loader />);
       this.instance = this.wrapper.instance();

@@ -15,7 +15,7 @@ See: [https://availity.github.io/react-block-ui/](https://availity.github.io/rea
 Install `react-block-ui` via NPM
 
 ```sh
-npm install --save react-block-ui react-addons-transition-group react react-dom
+npm install --save react-block-ui react react-dom
 ```
 
 Import the components you need, example:

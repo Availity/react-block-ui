@@ -7,7 +7,7 @@ export default () => {
   return (
     <div>
       <Helmet title="404 Page Not Found"/>
-      <section className="jumbotron text-xs-center mb-3">
+      <section className="jumbotron text-center mb-3">
         <Container fluid>
           <Row>
             <Col>

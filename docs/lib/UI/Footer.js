@@ -6,7 +6,7 @@ export default () => {
     <div className="footer">
       <Container fluid>
         <Row>
-          <Col className="text-xs-center">
+          <Col className="text-center">
             <p className="social">
               &copy; 2016 Availity
               {' '}

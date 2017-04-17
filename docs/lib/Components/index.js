@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Container, Row, Col, Nav, NavItem, NavLink } from 'reactstrap';
 
@@ -12,6 +13,9 @@ const ComponentLink = (props) => {
   );
 };
 
+ComponentLink.propTypes = {
+  item: PropTypes.object,
+};
 
 class Components extends React.Component {
   constructor(props) {
@@ -21,17 +25,17 @@ class Components extends React.Component {
       navItems: [
         {
           name: 'BlockUi',
-          to: '/components/blockui/'
+          to: '/components/blockui/',
         },
         {
           name: 'ReduxBlockUi',
-          to: '/components/reduxblockui/'
+          to: '/components/reduxblockui/',
         },
         {
           name: 'Loader',
-          to: '/components/loader/'
+          to: '/components/loader/',
         },
-      ]
+      ],
     };
   }
   render() {
@@ -41,7 +45,7 @@ class Components extends React.Component {
           <Col md={{ size: 3, push: 9 }}>
             <div className="docs-sidebar mb-3">
               <h5>Components</h5>
-              <Nav>
+              <Nav className="flex-column">
                 {this.state.navItems.map((item, i) => {
                   return <ComponentLink key={i} item={item} />;
                 })}
@@ -56,5 +60,9 @@ class Components extends React.Component {
     );
   }
 }
+
+Components.propTypes = {
+  children: PropTypes.any,
+};
 
 export default Components;

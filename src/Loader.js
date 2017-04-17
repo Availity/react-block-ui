@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import bezierEasing from 'bezier-easing';
 import animate from './animate';
 

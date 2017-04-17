@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import ReduxBlockUi from 'react-block-ui/redux';
@@ -44,11 +45,11 @@ class Example extends React.Component {
 }
 
 Example.propTypes = {
-  requestStart: React.PropTypes.func,
-  requestSuccess: React.PropTypes.func,
-  requestFailure: React.PropTypes.func,
-  otherAction: React.PropTypes.func,
-  actions: React.PropTypes.array,
+  requestStart: PropTypes.func,
+  requestSuccess: PropTypes.func,
+  requestFailure: PropTypes.func,
+  otherAction: PropTypes.func,
+  actions: PropTypes.array,
 };
 
 const forExampleOnly = type => () => ({ type });
