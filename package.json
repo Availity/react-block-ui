@@ -1,6 +1,6 @@
 {
   "name": "react-block-ui",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Evan Sharp <evan.sharp@availity.com>",
   "description": "Block UI for react",
   "main": "lib/index.js",
