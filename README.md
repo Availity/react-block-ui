@@ -21,8 +21,9 @@ npm install --save react-block-ui react react-dom
 Import the components you need, example:
 
 ```js
-import BlockUi, { Loader } from 'react-block-ui';
-import ReduxBlockUi, { BlockUiMiddleware } from 'react-block-ui/redux';
+import BlockUi from 'react-block-ui';
+import ReduxBlockUi from 'react-block-ui/redux'; // only for redux
+import reduxMiddleware from 'react-block-ui/reduxMiddleware'; // only for redux
 import from 'react-block-ui/style.css';
 ```
 
