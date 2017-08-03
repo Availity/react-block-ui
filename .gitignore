@@ -4,3 +4,5 @@ node_modules
 /build
 /lib
 /.tmp
+/redux.js
+/reduxMiddleware.js
