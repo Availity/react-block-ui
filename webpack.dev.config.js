@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
-var env = process.env.WEBPACK_BUILD || 'development';
+var env = process.env.NODE_ENV || 'development';
 
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
