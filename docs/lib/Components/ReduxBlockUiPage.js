@@ -7,7 +7,7 @@ import ReduxBlockUiExample from '../examples/ReduxBlockUi';
 const ReduxBlockUiExampleSource = require('!!raw!../examples/ReduxBlockUi.js');
 const ReduxMiddlewareSource = require('!!raw!../examples/ReduxStore');
 
-export default function ReduxBlockUi  () {
+export default function ReduxBlockUi() {
   return (
     <div>
       <Helmet title="ReduxBlockUi" />

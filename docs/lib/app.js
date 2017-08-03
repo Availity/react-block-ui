@@ -1,9 +1,8 @@
 import 'bootstrap-css';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
-import { createHistory } from 'history'
+import { createHistory } from 'history';
 import { Router, RouterContext, match, useRouterHistory, createMemoryHistory } from 'react-router';
 import routes from './routes';
 import Helmet from 'react-helmet';

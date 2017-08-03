@@ -31,10 +31,6 @@ class Components extends React.Component {
           name: 'ReduxBlockUi',
           to: '/components/reduxblockui/',
         },
-        {
-          name: 'Loader',
-          to: '/components/loader/',
-        },
       ],
     };
   }

@@ -1,6 +1,6 @@
 import middleware, { register, unregister, registered } from '../src/reduxMiddleware';
 
-describe('reduxMiddleware', function () {
+describe('reduxMiddleware', function() {
   beforeEach(() => {
     registered.splice(0, registered.length);
   });

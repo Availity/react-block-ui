@@ -8,6 +8,7 @@ export default class Example extends React.Component {
     super(props);
 
     this.toggleBlocking = this.toggleBlocking.bind(this);
+    this.youClickedIt = this.youClickedIt.bind(this);
     this.state = {
       blocking: false,
     };
@@ -29,7 +30,7 @@ export default class Example extends React.Component {
     }
   }
 
-  youClickedIt = () => {
+  youClickedIt() {
     if (this.state.blocking) {
       window.alert('Please report an issue that blocking did not prevent you from clicking the button');
     } else {

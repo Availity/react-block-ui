@@ -5,10 +5,12 @@ import Helmet from 'react-helmet';
 
 import BlockUiExample from '../examples/BlockUi';
 import BlockUiCustomLoaderExample from '../examples/BlockUiCustomLoader';
+import BlockUiCustomMessageExample from '../examples/BlockUiCustomMessage';
 import BlockUiNoChildrenExample from '../examples/BlockUiNoChildren';
 import BlockUiFocusExample from '../examples/BlockUiFocus';
 const BlockUiExampleSource = require('!!raw!../examples/BlockUi.js');
 const BlockUiCustomLoaderExampleSource = require('!!raw!../examples/BlockUiCustomLoader.js');
+const BlockUiCustomMessageExampleSource = require('!!raw!../examples/BlockUiCustomMessage.js');
 const BlockUiNoChildrenExampleSource = require('!!raw!../examples/BlockUiNoChildren.js');
 const BlockUiFocusExampleSource = require('!!raw!../examples/BlockUiFocus.js');
 
@@ -33,12 +35,25 @@ export default function BlockUiPage() {
         </PrismCode>
       </pre>
 
+      <h3>Custom Loading Message</h3>
+      <p>
+        You can provide a message which will appear above the loading indicate by using the <code>message</code> prop.
+      </p>
+      <div className="docs-example">
+        <BlockUiCustomMessageExample />
+      </div>
+      <pre>
+        <PrismCode className="language-jsx">
+          {BlockUiCustomMessageExampleSource}
+        </PrismCode>
+      </pre>
+
       <h3>Using external/custom loader</h3>
       <p>
         You do not have to use the default loader that comes with this library, you can pass anything you want. Pass JSX
         to render or a component to the <code>loader</code> prop to use it. In the exmaple below, we are using the fancy
         {' '}<a href="https://github.com/ConnorAtherton/loaders.css">Loaders.css</a> via the convenient{' '}
-        <a href="https://github.com/jonjaques/react-loaders">react-loaders</a> library. Use the select input to change
+        <a href="https://github.com/jonjaques/reacts">reacts</a> library. Use the select input to change
         the loader you see.
       </p>
       <div className="docs-example">

@@ -6,36 +6,36 @@ var webpackConfig = {
   context: path.join(__dirname, './src'),
   devtool: '#cheap-module-source-map',
   entry: {
-    'react-block-ui': ['./index.js']
+    'react-block-ui': ['./index.js'],
   },
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   module: {
     loaders: [
       {
         test: /\.(json)$/,
         loaders: [
-          'json-loader?cacheDirectory'
-        ]
+          'json-loader?cacheDirectory',
+        ],
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: [
-          'babel-loader?cacheDirectory'
-        ]
+          'babel-loader?cacheDirectory',
+        ],
       },
-    ]
+    ],
   },
   resolve: {
     alias: {
-      'react-block-ui': path.resolve('./src')
+      'react-block-ui': path.resolve('./src'),
     },
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
   },
   externals: {
     'react/lib/ExecutionEnvironment': true,
@@ -43,8 +43,8 @@ var webpackConfig = {
     'react/addons': true,
   },
   output: {
-    devtoolModuleFilenameTemplate        : '[absolute-resource-path]',
-    devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
+    devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+    devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
   },
   webpackServer: {
     noInfo: true,

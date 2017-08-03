@@ -3,28 +3,28 @@ import PropTypes from 'prop-types';
 import BlockUi from './BlockUi';
 import { register, unregister } from './reduxMiddleware';
 
-class ReduxBlockUi extends Component {
-  static propTypes = {
-    blocking: PropTypes.bool,
-    block: PropTypes.oneOfType([
-      PropTypes.instanceOf(RegExp),
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.func,
-    ]),
-    unblock: PropTypes.oneOfType([
-      PropTypes.instanceOf(RegExp),
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.func,
-    ]),
-    onChange: PropTypes.func,
-  };
+const propTypes = {
+  blocking: PropTypes.bool,
+  block: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
+  unblock: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
+  onChange: PropTypes.func,
+};
 
-  constructor (props) {
+class ReduxBlockUi extends Component {
+  constructor(props) {
     super(props);
 
-    this.middleware = ::this.middleware;
+    this.middleware = this.middleware.bind(this);
 
     this.blocking = 0;
     this.state = {
@@ -32,8 +32,8 @@ class ReduxBlockUi extends Component {
     };
   }
 
-  middleware (action) {
-    let {block, unblock} = this.props;
+  middleware(action) {
+    const { block, unblock } = this.props;
 
     this.checkAction(action, block);
     this.checkAction(action, unblock, false);
@@ -60,31 +60,31 @@ class ReduxBlockUi extends Component {
           const oldValue = this.blocking;
 
           if (block) {
-            this.setState({blocking: ++this.blocking});
+            this.setState({ blocking: ++this.blocking });
           } else {
             if (this.blocking < 1) {
               this.blocking = 0;
             } else {
               --this.blocking;
             }
-            this.setState({blocking: this.blocking});
+            this.setState({ blocking: this.blocking });
           }
 
           this.props.onChange && this.props.onChange(this.blocking, oldValue);
         }
-      })
+      });
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     register(this.middleware);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     unregister(this.middleware);
   }
 
-  render () {
+  render() {
     const {
       blocking,
       block,
@@ -96,5 +96,7 @@ class ReduxBlockUi extends Component {
     return (<BlockUi {...attributes} blocking={blocking || (this.state.blocking > 0)} />);
   }
 }
+
+ReduxBlockUi.propTypes = propTypes;
 
 export default ReduxBlockUi;

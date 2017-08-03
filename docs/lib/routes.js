@@ -3,7 +3,6 @@ import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import Home from './Home';
 import BlockUiPage from './Components/BlockUiPage';
 import ReduxBlockUiPage from './Components/ReduxBlockUiPage';
-import LoaderPage from './Components/LoaderPage';
 import NotFound from './NotFound';
 import Components from './Components';
 import UI from './UI';
@@ -15,7 +14,6 @@ const routes = (
       <IndexRedirect to="blockui/" />
       <Route path="blockui/" component={ BlockUiPage } />
       <Route path="reduxblockui/" component={ ReduxBlockUiPage } />
-      <Route path="loader/" component={ LoaderPage } />
     </Route>
     <Route path="*" component={NotFound} />
   </Route>

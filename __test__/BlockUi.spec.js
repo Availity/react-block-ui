@@ -1,11 +1,12 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import BlockUi, { Loader } from 'react-block-ui';
+import { shallow } from 'enzyme';
+import BlockUi from 'react-block-ui';
+import Loader from 'react-block-ui/Loader';
 
-const tab = {key: 'Tab', shiftKey: false};
-const shiftTab = {keyCode: 9, shiftKey: true};
+const tab = { key: 'Tab', shiftKey: false };
+const shiftTab = { keyCode: 9, shiftKey: true };
 
-describe('BlockUi', function() {
+describe('BlockUi', function () {
   describe('not blocking', () => {
     it('should render a "div" by default', () => {
       const wrapper = shallow(<BlockUi>Yo!</BlockUi>);
@@ -20,7 +21,7 @@ describe('BlockUi', function() {
     });
 
     it('should render with the props passed in', () => {
-      const wrapper = shallow(<BlockUi style={{textAlign: 'center'}}>Yo!</BlockUi>);
+      const wrapper = shallow(<BlockUi style={{ textAlign: 'center' }}>Yo!</BlockUi>);
 
       expect(wrapper.prop('style').textAlign).to.equal('center');
     });
@@ -62,15 +63,15 @@ describe('BlockUi', function() {
     });
 
     it('should render with the props passed in', () => {
-      const wrapper = shallow(<BlockUi blocking style={{textAlign: 'center'}}>Yo!</BlockUi>);
+      const wrapper = shallow(<BlockUi blocking style={{ textAlign: 'center' }}>Yo!</BlockUi>);
 
       expect(wrapper.prop('style').textAlign).to.equal('center');
     });
 
-    it('should render the className "av-block-ui"', () => {
+    it('should render the className "block-ui"', () => {
       const wrapper = shallow(<BlockUi blocking className="myClass">Yo!</BlockUi>);
 
-      expect(wrapper.hasClass('av-block-ui')).to.be.true;
+      expect(wrapper.hasClass('block-ui')).to.be.true;
     });
 
     it('should render className passed in', () => {
@@ -85,32 +86,32 @@ describe('BlockUi', function() {
       expect(wrapper.type()).to.equal('span');
     });
 
-    it('should append "av-block-ui-container" div', () => {
+    it('should append "block-ui-container" div', () => {
       const container = shallow(<BlockUi blocking>Yo!</BlockUi>).childAt(2);
 
       expect(container.type()).to.equal('div');
-      expect(container.hasClass('av-block-ui-container')).to.be.true;
+      expect(container.hasClass('block-ui-container')).to.be.true;
     });
 
-    it('should append "av-block-ui-overlay" div', () => {
+    it('should append "block-ui-overlay" div', () => {
       const overlay = shallow(<BlockUi blocking>Yo!</BlockUi>).childAt(2).childAt(0);
 
       expect(overlay.type()).to.equal('div');
-      expect(overlay.hasClass('av-block-ui-overlay')).to.be.true;
+      expect(overlay.hasClass('block-ui-overlay')).to.be.true;
     });
 
-    it('should append "av-block-ui-message-container" div', () => {
+    it('should append "block-ui-message-container" div', () => {
       const container = shallow(<BlockUi blocking>Yo!</BlockUi>).childAt(2).childAt(1);
 
       expect(container.type()).to.equal('div');
-      expect(container.hasClass('av-block-ui-message-container')).to.be.true;
+      expect(container.hasClass('block-ui-message-container')).to.be.true;
     });
 
-    it('should append "av-block-ui-message" div', () => {
+    it('should append "block-ui-message" div', () => {
       const message = shallow(<BlockUi blocking>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0);
 
       expect(message.type()).to.equal('div');
-      expect(message.hasClass('av-block-ui-message')).to.be.true;
+      expect(message.hasClass('block-ui-message')).to.be.true;
     });
 
     describe('the loader', () => {
@@ -121,19 +122,22 @@ describe('BlockUi', function() {
       });
 
       it('should append a custom Loader (element) if provided', () => {
-        const message = shallow(<BlockUi blocking loader={<span/>}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
+        const message = shallow(<BlockUi blocking
+          loader={<span />}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
 
         expect(message.type()).to.equal('span');
       });
 
       it('should append a custom Loader (string) if provided', () => {
-        const message = shallow(<BlockUi blocking loader="span">Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
+        const message = shallow(<BlockUi blocking
+          loader="span">Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
 
         expect(message.type()).to.equal('span');
       });
 
       it('should append a custom Loader (component) if provided', () => {
-        const message = shallow(<BlockUi blocking loader={Loader}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
+        const message = shallow(<BlockUi blocking
+          loader={Loader}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
 
         expect(message.type()).to.equal(Loader);
       });
@@ -158,7 +162,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(0).simulate('keyDown', {...shiftTab, preventDefault: spy});
+            wrapper.childAt(0).simulate('keyDown', { ...shiftTab, preventDefault: spy });
             expect(instance.blocker.focus).to.not.have.been.called;
             expect(spy).to.not.have.been.called;
           });
@@ -170,7 +174,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(0).simulate('keyDown', {...tab, preventDefault: spy});
+            wrapper.childAt(0).simulate('keyDown', { ...tab, preventDefault: spy });
             expect(instance.blocker.focus).to.have.been.called;
             expect(spy).to.have.been.called;
           });
@@ -185,7 +189,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(0).simulate('keyUp', {...shiftTab, preventDefault: spy});
+            wrapper.childAt(0).simulate('keyUp', { ...shiftTab, preventDefault: spy });
             expect(instance.blocker.focus).to.not.have.been.called;
             expect(spy).to.not.have.been.called;
           });
@@ -197,7 +201,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(0).simulate('keyUp', {...tab, preventDefault: spy});
+            wrapper.childAt(0).simulate('keyUp', { ...tab, preventDefault: spy });
             expect(instance.blocker.focus).to.have.been.called;
             expect(spy).to.not.have.been.called;
           });
@@ -214,7 +218,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(2).simulate('keyDown', {...tab, preventDefault: spy});
+            wrapper.childAt(2).simulate('keyDown', { ...tab, preventDefault: spy });
             expect(instance.topFocus.focus).to.not.have.been.called;
             expect(spy).to.not.have.been.called;
           });
@@ -226,7 +230,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(2).simulate('keyDown', {...shiftTab, preventDefault: spy});
+            wrapper.childAt(2).simulate('keyDown', { ...shiftTab, preventDefault: spy });
             expect(instance.topFocus.focus).to.have.been.called;
             expect(spy).to.have.been.called;
           });
@@ -241,7 +245,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(2).simulate('keyUp', {...tab, preventDefault: spy});
+            wrapper.childAt(2).simulate('keyUp', { ...tab, preventDefault: spy });
             expect(instance.topFocus.focus).to.not.have.been.called;
             expect(spy).to.not.have.been.called;
           });
@@ -253,7 +257,7 @@ describe('BlockUi', function() {
               focus: sinon.spy().named('focus'),
             };
             const spy = sinon.spy().named('preventDefault');
-            wrapper.childAt(2).simulate('keyUp', {...shiftTab, preventDefault: spy});
+            wrapper.childAt(2).simulate('keyUp', { ...shiftTab, preventDefault: spy });
             expect(instance.topFocus.focus).to.have.been.called;
             expect(spy).to.not.have.been.called;
           });
@@ -267,9 +271,9 @@ describe('BlockUi', function() {
       it('should store the focused element and focus on the top focus', () => {
         const wrapper = shallow(<BlockUi blocking={false}><input /></BlockUi>);
         const instance = wrapper.instance();
-        instance.helper = {parentNode: {contains: sinon.stub().returns(true)}};
+        instance.helper = { parentNode: { contains: sinon.stub().returns(true) } };
         wrapper.find('input').simulate('click');
-        instance.componentWillReceiveProps({blocking: true});
+        instance.componentWillReceiveProps({ blocking: true });
         expect(instance.focused).to.equal(document.activeElement);
         expect(instance.helper.parentNode.contains).to.have.been.called;
       });
@@ -282,8 +286,8 @@ describe('BlockUi', function() {
         const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
         const instance = wrapper.instance();
         const spy = sinon.spy();
-        instance.focused = {focus: spy};
-        instance.componentWillReceiveProps({blocking: false});
+        instance.focused = { focus: spy };
+        instance.componentWillReceiveProps({ blocking: false });
         expect(spy).to.have.been.called;
       });
     });
@@ -292,9 +296,8 @@ describe('BlockUi', function() {
       it('should not throw', () => {
         const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
         const instance = wrapper.instance();
-        const spy = sinon.spy();
         instance.focused = null;
-        expect (instance.componentWillReceiveProps.bind(instance, {blocking: false})).to.not.throw;
+        expect(instance.componentWillReceiveProps.bind(instance, { blocking: false })).to.not.throw;
       });
     });
   });

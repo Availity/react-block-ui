@@ -1,9 +1,24 @@
 {
-  "presets": ["es2015-loose", "stage-0", "react"],
-  "plugins": ["transform-runtime", "transform-proto-to-assign", "transform-class-properties"],
+  "presets": [
+    ["es2015", {"modules": false}],
+    "react"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    ["transform-react-remove-prop-types", {
+      "removeImport": true
+    }]
+  ],
   "env": {
+    "lib-dir": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    },
+    "webpack": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    },
     "test": {
       "plugins": [
+        "transform-es2015-modules-commonjs",
         ["istanbul", {
           "exclude": [
             "**/*.spec.js",
