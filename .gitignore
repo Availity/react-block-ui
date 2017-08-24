@@ -6,3 +6,4 @@ node_modules
 /.tmp
 /redux.js
 /reduxMiddleware.js
+/style.css
