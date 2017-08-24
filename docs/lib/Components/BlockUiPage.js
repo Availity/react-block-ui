@@ -21,10 +21,8 @@ export default function BlockUiPage() {
       <h3>BlockUi</h3>
       <p>
         This is the basic ability. Wrap a section with the <code>BlockUi</code> component and set the
-        <code>blocking</code>
-        prop to <code>true</code> to block the UI/children (and show the loader) or <code>false</code> to allow user
-        interaction
-        with the UI/children.
+        <code>blocking</code> prop to <code>true</code> to block the UI/children (and show the loader) or
+        <code>false</code> to allow user interaction with the UI/children.
       </p>
       <div className="docs-example">
         <BlockUiExample />
@@ -32,6 +30,36 @@ export default function BlockUiPage() {
       <pre>
         <PrismCode className="language-jsx">
           {BlockUiExampleSource}
+        </PrismCode>
+      </pre>
+
+      <h4>Properties</h4>
+      <p>
+        <code>blocking</code> is the main props here, allowing you to show the blocking UI. When it is <code>true</code>
+        the blocking UI will be shown, when it is <code>false</code> the blocking UI will not be shown. For the rest of
+        the props, see their examples/demos below.
+      </p>
+      <pre>
+        <PrismCode className="language-jsx">
+{`BlockUi.propTypes = {
+  blocking: PropTypes.bool,
+  children: PropTypes.node,
+  renderChildren: PropTypes.bool, // default to true
+  className: PropTypes.string,
+  message: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
+  loader: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.node,
+  ]),
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+};`}
         </PrismCode>
       </pre>
 
@@ -53,7 +81,7 @@ export default function BlockUiPage() {
         You do not have to use the default loader that comes with this library, you can pass anything you want. Pass JSX
         to render or a component to the <code>loader</code> prop to use it. In the exmaple below, we are using the fancy
         {' '}<a href="https://github.com/ConnorAtherton/loaders.css">Loaders.css</a> via the convenient{' '}
-        <a href="https://github.com/jonjaques/reacts">reacts</a> library. Use the select input to change
+        <a href="https://github.com/jonjaques/react-loaders">react-loaders</a> library. Use the select input to change
         the loader you see.
       </p>
       <div className="docs-example">
@@ -84,9 +112,8 @@ export default function BlockUiPage() {
       <h3>Do not render children while blocking</h3>
       <p>
         Setting the <code>renderChildren</code> prop to <code>false</code> will prevent the children from rendering
-        while
-        blocking. This is useful when the children depend on information which is still loading and would provide a poor
-        user experience if rendered without the data which is still being requested/loading.
+        while blocking. This is useful when the children depend on information which is still loading and would provide
+        a poor user experience if rendered without the data which is still being requested/loading.
       </p>
       <div className="docs-example">
         <BlockUiNoChildrenExample />
