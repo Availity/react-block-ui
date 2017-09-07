@@ -1,7 +1,7 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import babili from 'rollup-plugin-babili';
+import minify from 'rollup-plugin-babel-minify';
 import replace from 'rollup-plugin-replace';
 
 // Require understands JSON files.
@@ -55,7 +55,7 @@ umdConfig.external = peerDependencies;
 umdConfig.plugins.push(replace({
   'process.env.NODE_ENV': JSON.stringify('production'),
 }));
-umdConfig.plugins.push(babili({ comments: false }));
+umdConfig.plugins.push(minify({ comments: false }));
 umdConfig.targets = [
   { dest: 'dist/reactblockui.min.js', format: 'umd' },
 ];

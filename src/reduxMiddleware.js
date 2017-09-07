@@ -13,7 +13,7 @@ export const unregister = (fn) => {
   }
 };
 
-export default store => next => action => {
+export default () => next => action => {
   registered.forEach(cb => {
     if (typeof cb === 'function') {
       cb(action);

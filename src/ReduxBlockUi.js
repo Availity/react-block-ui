@@ -3,23 +3,6 @@ import PropTypes from 'prop-types';
 import BlockUi from './BlockUi';
 import { register, unregister } from './reduxMiddleware';
 
-const propTypes = {
-  blocking: PropTypes.bool,
-  block: PropTypes.oneOfType([
-    PropTypes.instanceOf(RegExp),
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.func,
-  ]),
-  unblock: PropTypes.oneOfType([
-    PropTypes.instanceOf(RegExp),
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.func,
-  ]),
-  onChange: PropTypes.func,
-};
-
 class ReduxBlockUi extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +13,14 @@ class ReduxBlockUi extends Component {
     this.state = {
       blocking: 0,
     };
+  }
+
+  componentWillMount() {
+    register(this.middleware);
+  }
+
+  componentWillUnmount() {
+    unregister(this.middleware);
   }
 
   middleware(action) {
@@ -76,20 +67,12 @@ class ReduxBlockUi extends Component {
     }
   }
 
-  componentWillMount() {
-    register(this.middleware);
-  }
-
-  componentWillUnmount() {
-    unregister(this.middleware);
-  }
-
   render() {
     const {
       blocking,
-      block,
-      unblock,
-      onChange,
+      block: omit1,
+      unblock: omit2,
+      onChange: omit3,
       ...attributes
     } = this.props;
 
@@ -97,6 +80,21 @@ class ReduxBlockUi extends Component {
   }
 }
 
-ReduxBlockUi.propTypes = propTypes;
+ReduxBlockUi.propTypes = {
+  blocking: PropTypes.bool,
+  block: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
+  unblock: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func,
+  ]),
+  onChange: PropTypes.func,
+};
 
 export default ReduxBlockUi;

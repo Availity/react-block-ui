@@ -2,6 +2,7 @@
   "extends" : "eslint-config-availity/react",
   "rules": {
     "semi" : [2, "always"],
-    "comma-dangle": [2, "always-multiline"]
+    "comma-dangle": [2, "always-multiline"],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^(unused|omit)" }]
   }
 }

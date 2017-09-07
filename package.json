@@ -1,6 +1,6 @@
 {
   "name": "react-block-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Evan Sharp <evan.sharp@availity.com>",
   "description": "Block UI for react",
   "main": "dist/reactblockui.cjs.js",
@@ -120,7 +120,7 @@
     "rimraf": "^2.6.1",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-babili": "^3.1.0",
+    "rollup-plugin-babel-minify": "^3.1.0",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
