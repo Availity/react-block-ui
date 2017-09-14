@@ -17,7 +17,7 @@ var paths = [
   '/404.html',
 ];
 
-var basepath = env === 'production' ? '/react-block-ui/' : '/';
+var basepath = env === 'production' ? process.env.BASEPATH || '/react-block-ui/' : '/';
 
 var config = [{
   devtool: 'source-map',
