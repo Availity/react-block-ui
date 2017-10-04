@@ -39,10 +39,6 @@ class BlockUi extends Component {
             (window.setImmediate || setTimeout)(() => this.topFocus && this.topFocus.focus());
           }
         }
-        if (nextProps.keepInView) {
-          this.attachListeners();
-          this.keepInView(nextProps);
-        }
       } else {
         this.detachListeners();
         const ae = document.activeElement;
@@ -51,6 +47,10 @@ class BlockUi extends Component {
           this.focused = null;
         }
       }
+    }
+    if (nextProps.keepInView && (nextProps.keepInView !== this.props.keepInView || (nextProps.blocking && nextProps.blocking !== this.props.blocking))) {
+      this.attachListeners();
+      this.keepInView(nextProps);
     }
   }
 
@@ -105,7 +105,8 @@ class BlockUi extends Component {
     if (props.blocking && props.keepInView && this.container) {
       const bounds = this.container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      if (bounds.top > 0 && bounds.bottom < windowHeight) {
+      if (bounds.top > windowHeight || bounds.bottom < 0) return;
+      if (bounds.top >= 0 && bounds.bottom <= windowHeight) {
         if (this.state.top !== '50%') {
           this.setState({ top: '50%' });
         }
