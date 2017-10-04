@@ -19,7 +19,12 @@ class BlockUi extends Component {
     this.setHelper = this.setRef.bind(this, 'helper');
     this.setBlocker = this.setRef.bind(this, 'blocker');
     this.setTopFocus = this.setRef.bind(this, 'topFocus');
+    this.setContainer = this.setRef.bind(this, 'container');
+    this.handleScroll = this.handleScroll.bind(this);
+
+    this.state = { top: '50%' };
   }
+
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.blocking !== this.props.blocking) {
@@ -34,7 +39,12 @@ class BlockUi extends Component {
             (window.setImmediate || setTimeout)(() => this.topFocus && this.topFocus.focus());
           }
         }
+        if (nextProps.keepInView) {
+          this.attachListeners();
+          this.keepInView(nextProps);
+        }
       } else {
+        this.detachListeners();
         const ae = document.activeElement;
         if (this.focused && (!ae || ae === document.body || ae === this.topFocus)) {
           this.focused.focus();
@@ -44,8 +54,20 @@ class BlockUi extends Component {
     }
   }
 
-  setRef(nane, ref) {
+  componentWillUnmount() {
+    this.detachListeners();
+  }
+
+  setRef(name, ref) {
     this[name] = ref;
+  }
+
+  attachListeners() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  detachListeners() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   blockingTab(e, withShift = false) {
@@ -79,6 +101,30 @@ class BlockUi extends Component {
     }
   }
 
+  keepInView(props = this.props) {
+    if (props.blocking && props.keepInView && this.container) {
+      const bounds = this.container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (bounds.top > 0 && bounds.bottom < windowHeight) {
+        if (this.state.top !== '50%') {
+          this.setState({ top: '50%' });
+        }
+        return;
+      }
+      let top = Math.max((Math.min(windowHeight, bounds.bottom) - Math.max(bounds.top, 0)) / 2, 0);
+      if (bounds.top < 0) {
+        top -= bounds.top;
+      }
+      if (this.state.top !== top) {
+        this.setState({ top });
+      }
+    }
+  }
+
+  handleScroll() {
+    this.keepInView();
+  }
+
   render() {
     const {
       tag: Tag,
@@ -88,6 +134,7 @@ class BlockUi extends Component {
       message,
       loader: Loader,
       renderChildren,
+      keepInView,
       ...attributes
     } = this.props;
 
@@ -95,7 +142,7 @@ class BlockUi extends Component {
     const renderChilds = !blocking || renderChildren;
 
     return (
-      <Tag {...attributes} className={classes} aria-busy={blocking}>
+      <Tag {...attributes} className={classes} aria-busy={blocking} ref={this.setContainer}>
         {blocking &&
         <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
         {renderChilds && children}
@@ -107,7 +154,7 @@ class BlockUi extends Component {
           onKeyDown={this.tabbedDownBottom}
         >
           <div className="block-ui-overlay" />
-          <div className="block-ui-message-container">
+          <div className="block-ui-message-container" style={{ top: keepInView ? this.state.top : undefined }}>
             <div className="block-ui-message">
               {message}
               {React.isValidElement(Loader) ? Loader : <Loader />}
@@ -125,6 +172,7 @@ BlockUi.propTypes = {
   blocking: PropTypes.bool,
   children: PropTypes.node,
   renderChildren: PropTypes.bool,
+  keepInView: PropTypes.bool,
   className: PropTypes.string,
   message: PropTypes.oneOfType([
     PropTypes.string,
