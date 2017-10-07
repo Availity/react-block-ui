@@ -326,12 +326,43 @@ describe('BlockUi', function() {
         expect(instance.setState).to.have.been.called;
         expect(wrapper.state('top')).to.equal((window.innerHeight - 100) / 2);
       });
+      it('should render when messageContainer is still null', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: -100, bottom: window.innerHeight - 100, height: 500});
+        instance.messageContainer = null;
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(434);
+      });
       it('should account for the top offset when container top is outside of viewport', () => {
         const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
         const instance = wrapper.instance();
-        instance.container.getBoundingClientRect = () => ({top: -100, bottom: window.innerHeight - 100});
+        instance.container.getBoundingClientRect = () => ({top: -100, bottom: window.innerHeight - 100, height: 500});
+        instance.messageContainer = {
+          getBoundingClientRect: () => ({height: 100}),
+        };
         instance.keepInView();
         expect(wrapper.state('top')).to.equal(434);
+      });
+      it('should claim down so the message does not cut off at the top', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: window.innerHeight - 50, bottom: window.innerHeight + 100, height: 500});
+        instance.messageContainer = {
+          getBoundingClientRect: () => ({height: 100}),
+        };
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(50);
+      });
+      it('should claim down so the message does not cut off at the bottom', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: -400, bottom: 100, height: 500});
+        instance.messageContainer = {
+          getBoundingClientRect: () => ({height: 100}),
+        };
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(450);
       });
       it('should not set state if state.top is already set to the same value', () => {
         const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);

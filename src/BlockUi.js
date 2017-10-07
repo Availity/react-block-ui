@@ -20,6 +20,7 @@ class BlockUi extends Component {
     this.setBlocker = this.setRef.bind(this, 'blocker');
     this.setTopFocus = this.setRef.bind(this, 'topFocus');
     this.setContainer = this.setRef.bind(this, 'container');
+    this.setMessageContainer = this.setRef.bind(this, 'messageContainer');
     this.handleScroll = this.handleScroll.bind(this);
 
     this.state = { top: '50%' };
@@ -103,22 +104,25 @@ class BlockUi extends Component {
 
   keepInView(props = this.props) {
     if (props.blocking && props.keepInView && this.container) {
-      const bounds = this.container.getBoundingClientRect();
+      const containerBounds = this.container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      if (bounds.top > windowHeight || bounds.bottom < 0) return;
-      if (bounds.top >= 0 && bounds.bottom <= windowHeight) {
+      if (containerBounds.top > windowHeight || containerBounds.bottom < 0) return;
+      if (containerBounds.top >= 0 && containerBounds.bottom <= windowHeight) {
         if (this.state.top !== '50%') {
           this.setState({ top: '50%' });
         }
         return;
       }
-      let top = Math.max((Math.min(windowHeight, bounds.bottom) - Math.max(bounds.top, 0)) / 2, 0);
-      if (bounds.top < 0) {
-        top -= bounds.top;
+
+      const messageBoundsHeight = this.messageContainer ? this.messageContainer.getBoundingClientRect().height : 0;
+      let top = Math.max(Math.min(windowHeight, containerBounds.bottom) - Math.max(containerBounds.top, 0), messageBoundsHeight) / 2;
+      if (containerBounds.top < 0) {
+        top = Math.min(top - containerBounds.top, containerBounds.height - (messageBoundsHeight / 2));
       }
       if (this.state.top !== top) {
-        this.setState({ top });
+        this.setState({top});
       }
+
     }
   }
 
@@ -155,7 +159,10 @@ class BlockUi extends Component {
           onKeyDown={this.tabbedDownBottom}
         >
           <div className="block-ui-overlay" />
-          <div className="block-ui-message-container" style={{ top: keepInView ? this.state.top : undefined }}>
+          <div className="block-ui-message-container"
+            ref={this.setMessageContainer}
+            style={{ top: keepInView ? this.state.top : undefined }}
+          >
             <div className="block-ui-message">
               {message}
               {React.isValidElement(Loader) ? Loader : <Loader />}
