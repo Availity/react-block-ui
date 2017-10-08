@@ -19,7 +19,13 @@ class BlockUi extends Component {
     this.setHelper = this.setRef.bind(this, 'helper');
     this.setBlocker = this.setRef.bind(this, 'blocker');
     this.setTopFocus = this.setRef.bind(this, 'topFocus');
+    this.setContainer = this.setRef.bind(this, 'container');
+    this.setMessageContainer = this.setRef.bind(this, 'messageContainer');
+    this.handleScroll = this.handleScroll.bind(this);
+
+    this.state = { top: '50%' };
   }
+
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.blocking !== this.props.blocking) {
@@ -35,6 +41,7 @@ class BlockUi extends Component {
           }
         }
       } else {
+        this.detachListeners();
         const ae = document.activeElement;
         if (this.focused && (!ae || ae === document.body || ae === this.topFocus)) {
           this.focused.focus();
@@ -42,10 +49,26 @@ class BlockUi extends Component {
         }
       }
     }
+    if (nextProps.keepInView && (nextProps.keepInView !== this.props.keepInView || (nextProps.blocking && nextProps.blocking !== this.props.blocking))) {
+      this.attachListeners();
+      this.keepInView(nextProps);
+    }
   }
 
-  setRef(nane, ref) {
+  componentWillUnmount() {
+    this.detachListeners();
+  }
+
+  setRef(name, ref) {
     this[name] = ref;
+  }
+
+  attachListeners() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  detachListeners() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   blockingTab(e, withShift = false) {
@@ -79,6 +102,34 @@ class BlockUi extends Component {
     }
   }
 
+  keepInView(props = this.props) {
+    if (props.blocking && props.keepInView && this.container) {
+      const containerBounds = this.container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (containerBounds.top > windowHeight || containerBounds.bottom < 0) return;
+      if (containerBounds.top >= 0 && containerBounds.bottom <= windowHeight) {
+        if (this.state.top !== '50%') {
+          this.setState({ top: '50%' });
+        }
+        return;
+      }
+
+      const messageBoundsHeight = this.messageContainer ? this.messageContainer.getBoundingClientRect().height : 0;
+      let top = Math.max(Math.min(windowHeight, containerBounds.bottom) - Math.max(containerBounds.top, 0), messageBoundsHeight) / 2;
+      if (containerBounds.top < 0) {
+        top = Math.min(top - containerBounds.top, containerBounds.height - (messageBoundsHeight / 2));
+      }
+      if (this.state.top !== top) {
+        this.setState({top});
+      }
+
+    }
+  }
+
+  handleScroll() {
+    this.keepInView();
+  }
+
   render() {
     const {
       tag: Tag,
@@ -88,6 +139,7 @@ class BlockUi extends Component {
       message,
       loader: Loader,
       renderChildren,
+      keepInView,
       ...attributes
     } = this.props;
 
@@ -95,7 +147,7 @@ class BlockUi extends Component {
     const renderChilds = !blocking || renderChildren;
 
     return (
-      <Tag {...attributes} className={classes} aria-busy={blocking}>
+      <Tag {...attributes} className={classes} aria-busy={blocking} ref={this.setContainer}>
         {blocking &&
         <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
         {renderChilds && children}
@@ -107,7 +159,10 @@ class BlockUi extends Component {
           onKeyDown={this.tabbedDownBottom}
         >
           <div className="block-ui-overlay" />
-          <div className="block-ui-message-container">
+          <div className="block-ui-message-container"
+            ref={this.setMessageContainer}
+            style={{ top: keepInView ? this.state.top : undefined }}
+          >
             <div className="block-ui-message">
               {message}
               {React.isValidElement(Loader) ? Loader : <Loader />}
@@ -125,6 +180,7 @@ BlockUi.propTypes = {
   blocking: PropTypes.bool,
   children: PropTypes.node,
   renderChildren: PropTypes.bool,
+  keepInView: PropTypes.bool,
   className: PropTypes.string,
   message: PropTypes.oneOfType([
     PropTypes.string,

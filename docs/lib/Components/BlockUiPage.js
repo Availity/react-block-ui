@@ -7,11 +7,13 @@ import BlockUiExample from '../examples/BlockUi';
 import BlockUiCustomLoaderExample from '../examples/BlockUiCustomLoader';
 import BlockUiCustomMessageExample from '../examples/BlockUiCustomMessage';
 import BlockUiNoChildrenExample from '../examples/BlockUiNoChildren';
+import BlockUiKeepInViewExample from '../examples/BlockUiKeepInView';
 import BlockUiFocusExample from '../examples/BlockUiFocus';
 const BlockUiExampleSource = require('!!raw!../examples/BlockUi.js');
 const BlockUiCustomLoaderExampleSource = require('!!raw!../examples/BlockUiCustomLoader.js');
 const BlockUiCustomMessageExampleSource = require('!!raw!../examples/BlockUiCustomMessage.js');
 const BlockUiNoChildrenExampleSource = require('!!raw!../examples/BlockUiNoChildren.js');
+const BlockUiKeepInViewExampleSource = require('!!raw!../examples/BlockUiKeepInView.js');
 const BlockUiFocusExampleSource = require('!!raw!../examples/BlockUiFocus.js');
 
 export default function BlockUiPage() {
@@ -43,6 +45,7 @@ export default function BlockUiPage() {
         <PrismCode className="language-jsx">
 {`BlockUi.propTypes = {
   blocking: PropTypes.bool,
+  keepInView: PropTypes.bool,
   children: PropTypes.node,
   renderChildren: PropTypes.bool, // default to true
   className: PropTypes.string,
@@ -121,6 +124,23 @@ export default function BlockUiPage() {
       <pre>
         <PrismCode className="language-jsx">
           {BlockUiNoChildrenExampleSource}
+        </PrismCode>
+      </pre>
+
+      <h3>Keep the loader (and message) in view</h3>
+      <p>
+        If you have a large/long section which you are blocking, you may notice that the loader/message isn't always in
+        the viewport and thus is not visible to the user. To help with this, you can pass the <code>keepInView</code>
+        prop. When <code>keepInView</code> is true, the loader will center itself within the part of the blocked container
+        which is in the viewport. Note: This only affect vertical scrolling.
+        Click the "Toggle Block" button in the example below and scroll down.
+      </p>
+      <div className="docs-example">
+        <BlockUiKeepInViewExample />
+      </div>
+      <pre>
+        <PrismCode className="language-jsx">
+          {BlockUiKeepInViewExampleSource}
         </PrismCode>
       </pre>
     </div>

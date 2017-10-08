@@ -1,12 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import BlockUi from 'react-block-ui';
 import Loader from 'react-block-ui/Loader';
 
 const tab = { key: 'Tab', shiftKey: false };
 const shiftTab = { keyCode: 9, shiftKey: true };
 
-describe('BlockUi', function () {
+describe('BlockUi', function() {
   describe('not blocking', () => {
     it('should render a "div" by default', () => {
       const wrapper = shallow(<BlockUi>Yo!</BlockUi>);
@@ -122,22 +122,19 @@ describe('BlockUi', function () {
       });
 
       it('should append a custom Loader (element) if provided', () => {
-        const message = shallow(<BlockUi blocking
-          loader={<span />}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
+        const message = shallow(<BlockUi blocking loader={<span />}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
 
         expect(message.type()).to.equal('span');
       });
 
       it('should append a custom Loader (string) if provided', () => {
-        const message = shallow(<BlockUi blocking
-          loader="span">Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
+        const message = shallow(<BlockUi blocking loader="span">Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
 
         expect(message.type()).to.equal('span');
       });
 
       it('should append a custom Loader (component) if provided', () => {
-        const message = shallow(<BlockUi blocking
-          loader={Loader}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
+        const message = shallow(<BlockUi blocking loader={Loader}>Yo!</BlockUi>).childAt(2).childAt(1).childAt(0).childAt(0);
 
         expect(message.type()).to.equal(Loader);
       });
@@ -266,6 +263,146 @@ describe('BlockUi', function () {
     });
   });
 
+  describe('keepInView', () => {
+    describe('when not blocking', () => {
+      it('should do nothing', () => {
+        const wrapper = mount(<BlockUi keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        sinon.spy(instance.container, 'getBoundingClientRect');
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+        expect(instance.container.getBoundingClientRect).to.not.have.been.called;
+      });
+    });
+    describe('when keepInView prop is falsey', () => {
+      it('should do nothing', () => {
+        const wrapper = mount(<BlockUi blocking><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        sinon.spy(instance.container, 'getBoundingClientRect');
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+        expect(instance.container.getBoundingClientRect).to.not.have.been.called;
+      });
+    });
+    describe('when container is falsey', () => {
+      it('should do nothing', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        instance.container = null;
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+      });
+    });
+    describe('container completely in viewport', () => {
+      it('should set state if state.top is not already "50%"', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        wrapper.setState({top: 'something else'});
+        instance.keepInView();
+        expect(instance.setState).to.have.been.called;
+        expect(wrapper.state('top')).to.equal('50%');
+      });
+      it('should not set state if state.top is already "50%"', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        expect(wrapper.state('top')).to.equal('50%');
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+      });
+    });
+    describe('container partially in viewport', () => {
+      it('should set state if state.top is needs to change', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        wrapper.setState({top: 'something else'});
+        instance.container.getBoundingClientRect = () => ({top: 100, bottom: window.innerHeight + 100});
+        instance.keepInView();
+        expect(instance.setState).to.have.been.called;
+        expect(wrapper.state('top')).to.equal((window.innerHeight - 100) / 2);
+      });
+      it('should render when messageContainer is still null', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: -100, bottom: window.innerHeight - 100, height: 500});
+        instance.messageContainer = null;
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(434);
+      });
+      it('should account for the top offset when container top is outside of viewport', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: -100, bottom: window.innerHeight - 100, height: 500});
+        instance.messageContainer = {
+          getBoundingClientRect: () => ({height: 100}),
+        };
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(434);
+      });
+      it('should claim down so the message does not cut off at the top', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: window.innerHeight - 50, bottom: window.innerHeight + 100, height: 500});
+        instance.messageContainer = {
+          getBoundingClientRect: () => ({height: 100}),
+        };
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(50);
+      });
+      it('should claim down so the message does not cut off at the bottom', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: -400, bottom: 100, height: 500});
+        instance.messageContainer = {
+          getBoundingClientRect: () => ({height: 100}),
+        };
+        instance.keepInView();
+        expect(wrapper.state('top')).to.equal(450);
+      });
+      it('should not set state if state.top is already set to the same value', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        instance.container.getBoundingClientRect = () => ({top: 200, bottom: window.innerHeight + 200});
+        wrapper.setState({top: 284});
+        sinon.spy(instance, 'setState');
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+      });
+    });
+    describe('container is not in viewport', () => {
+      it('should do nothing when container is above', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        instance.container.getBoundingClientRect = () => ({top: -200, bottom: -100});
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+      });
+      it('should do nothing when container is below', () => {
+        const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(instance, 'setState');
+        instance.container.getBoundingClientRect = () => ({top: window.innerHeight + 100, bottom: window.innerHeight + 200});
+        instance.keepInView();
+        expect(instance.setState).to.not.have.been.called;
+      });
+    });
+  });
+  describe('handleScroll', () => {
+    it('should call keepInView', () => {
+      const wrapper = mount(<BlockUi blocking keepInView><input /></BlockUi>);
+      const instance = wrapper.instance();
+      sinon.spy(instance, 'keepInView');
+      instance.handleScroll();
+      expect(instance.keepInView).to.have.been.called;
+    });
+  });
+
   describe('not blocking to blocking', () => {
     describe('focused in blocking area', () => {
       it('should store the focused element and focus on the top focus', () => {
@@ -277,6 +414,27 @@ describe('BlockUi', function () {
         expect(instance.focused).to.equal(document.activeElement);
         expect(instance.helper.parentNode.contains).to.have.been.called;
       });
+    });
+    describe('keepInView', () => {
+      it('should add a scroll listener', () => {
+        const wrapper = shallow(<BlockUi keepInView><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(window, 'addEventListener');
+        instance.componentWillReceiveProps({ blocking: true, keepInView: true });
+        expect(window.addEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
+        window.addEventListener.restore();
+      });
+    });
+  });
+
+  describe('not keepInView to keepInView', () => {
+    it('should add a scroll listener', () => {
+      const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
+      const instance = wrapper.instance();
+      sinon.spy(window, 'addEventListener');
+      instance.componentWillReceiveProps({ blocking: true, keepInView: true });
+      expect(window.addEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
+      window.addEventListener.restore();
     });
   });
 
@@ -291,7 +449,6 @@ describe('BlockUi', function () {
         expect(spy).to.have.been.called;
       });
     });
-
     describe('not previously focused in blocking area', () => {
       it('should not throw', () => {
         const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
@@ -299,6 +456,27 @@ describe('BlockUi', function () {
         instance.focused = null;
         expect(instance.componentWillReceiveProps.bind(instance, { blocking: false })).to.not.throw;
       });
+    });
+    describe('keepInView', () => {
+      it('should remove a scroll listener', () => {
+        const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
+        const instance = wrapper.instance();
+        sinon.spy(window, 'removeEventListener');
+        instance.componentWillReceiveProps({ blocking: false });
+        expect(window.removeEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
+        window.removeEventListener.restore();
+      });
+    });
+  });
+
+  describe('componentWillUnmount', () => {
+    it('should remove the scroll listener', () => {
+      const wrapper = mount(<BlockUi blocking><input /></BlockUi>);
+      const instance = wrapper.instance();
+      sinon.spy(window, 'removeEventListener');
+      wrapper.unmount();
+      expect(window.removeEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
+      window.removeEventListener.restore();
     });
   });
 });

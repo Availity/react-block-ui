@@ -7,3 +7,4 @@ node_modules
 /style.css
 /redux.js
 /reduxMiddleware.js
+.idea
