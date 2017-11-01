@@ -48,7 +48,7 @@
     z-index: 1011;
 }
 
-<!-- CSS Animations -->
+/* CSS Animations */
 @-webkit-keyframes fadeInRTL1 {
     0% {
         opacity: 0;
