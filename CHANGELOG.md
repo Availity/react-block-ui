@@ -1,6 +1,20 @@
-<a name="1.1.0"></a>
-# [1.1.0](https://github.com/Availity/react-block-ui/compare/v1.0.3...v1.1.0) (2017-10-08)
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/Availity/react-block-ui/compare/v1.1.1...v1.1.2) (2018-07-31)
 
+
+### Bug Fixes
+
+* **activeElement:** account for IE suckage ([7628259](https://github.com/Availity/react-block-ui/commit/7628259)), closes [#18](https://github.com/Availity/react-block-ui/issues/18)
+
+
+
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/Availity/react-block-ui/compare/v1.1.0...v1.1.1) (2017-11-01)
+
+
+### Bug Fixes
+
+* **styles:** fix bad comment syntax. ([4b4fc68](https://github.com/Availity/react-block-ui/commit/4b4fc68))
 
 ### Features
 

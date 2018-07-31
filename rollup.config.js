@@ -15,10 +15,10 @@ function baseConfig() {
     entry: 'src/index.js',
     plugins: [
       nodeResolve(),
-      commonjs(),
       babel({
         plugins: ['external-helpers'],
       }),
+      commonjs(),
     ],
     sourceMap: true,
   };
