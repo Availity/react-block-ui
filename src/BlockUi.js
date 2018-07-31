@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DefaultLoader from './Loader';
+import safeActiveElement from './safeActiveElement';
 
 const defaultProps = {
   tag: 'div',
@@ -32,8 +33,8 @@ class BlockUi extends Component {
       if (nextProps.blocking) {
         // blocking started
         if (this.helper && this.helper.parentNode && this.helper.parentNode.contains
-          && this.helper.parentNode.contains(document.activeElement)) {
-          this.focused = document.activeElement;
+          && this.helper.parentNode.contains(safeActiveElement())) {
+          this.focused = safeActiveElement();
           // We cannot just blur to remove focus due to IE bug so we must manually move the focus somewhere else.
           // https://www.tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#blurring-the-body-switches-windows-in-ie9-and-ie10
           if (this.focused && this.focused !== document.body) {
@@ -42,7 +43,7 @@ class BlockUi extends Component {
         }
       } else {
         this.detachListeners();
-        const ae = document.activeElement;
+        const ae = safeActiveElement();
         if (this.focused && (!ae || ae === document.body || ae === this.topFocus)) {
           this.focused.focus();
           this.focused = null;
