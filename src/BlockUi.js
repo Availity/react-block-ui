@@ -35,7 +35,6 @@ class BlockUi extends Component {
         if (this.helper && this.helper.parentNode && this.helper.parentNode.contains
           && this.helper.parentNode.contains(safeActiveElement())) {
           this.focused = safeActiveElement();
-          // We cannot just blur to remove focus due to IE bug so we must manually move the focus somewhere else.
           // https://www.tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#blurring-the-body-switches-windows-in-ie9-and-ie10
           if (this.focused && this.focused !== document.body) {
             (window.setImmediate || setTimeout)(() => this.focused && this.focused.blur());
