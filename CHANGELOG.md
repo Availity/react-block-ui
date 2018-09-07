@@ -1,3 +1,13 @@
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/Availity/react-block-ui/compare/v1.1.2...v1.1.3) (2018-09-07)
+
+
+### Bug Fixes
+
+* **FocusManagement:** fix scroll to top on unlock ([#20](https://github.com/Availity/react-block-ui/issues/20)) ([58c9e67](https://github.com/Availity/react-block-ui/commit/58c9e67))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/Availity/react-block-ui/compare/v1.1.1...v1.1.2) (2018-07-31)
 
