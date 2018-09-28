@@ -75,7 +75,6 @@ var config = [{
   resolve: {
     extensions: ['', '.js', '.jsx', '.json'],
     alias: {
-      'bootstrap-css': path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.css'),
       'react-block-ui': path.resolve('./src'),
     },
   },

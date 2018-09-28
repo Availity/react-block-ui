@@ -1,4 +1,3 @@
-import 'bootstrap-css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
@@ -43,6 +42,7 @@ export default (locals, callback) => {
           <link rel=icon href="${basename}/assets/favicon.ico">
           <link rel="stylesheet" href="${basename}/assets/style.css"/>
           <link rel="stylesheet" href="${basename}/assets/docs.css"/>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         </head>
         <body>
           <div id="app">${body}</div>
