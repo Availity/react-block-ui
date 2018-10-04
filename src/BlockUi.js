@@ -37,14 +37,16 @@ class BlockUi extends Component {
           this.focused = safeActiveElement();
           // https://www.tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#blurring-the-body-switches-windows-in-ie9-and-ie10
           if (this.focused && this.focused !== document.body) {
-            (window.setImmediate || setTimeout)(() => this.focused && this.focused.blur());
+            (window.setImmediate || setTimeout)(() => this.focused && typeof this.focused.blur === 'function' && this.focused.blur());
           }
         }
       } else {
         this.detachListeners();
         const ae = safeActiveElement();
         if (this.focused && (!ae || ae === document.body || ae === this.topFocus)) {
-          this.focused.focus();
+          if (typeof this.focused.focus === 'function') {
+            this.focused.focus();
+          }
           this.focused = null;
         }
       }
