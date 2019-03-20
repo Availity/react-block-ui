@@ -7,6 +7,7 @@
   "jsnext:main": "dist/reactblockui.es.js",
   "module": "dist/reactblockui.es.js",
   "style": "style.css",
+  "types": "dist/reactblockui.d.ts",
   "engines": {
     "node": ">= 5.0.0",
     "npm": "^3.0.0"
@@ -19,7 +20,7 @@
     "cleanup": "rimraf .nyc_output .tmp",
     "start": "cross-env BABEL_ENV=webpack webpack-dev-server --config ./webpack.dev.config.js --watch",
     "build:docs": "cross-env NODE_ENV=production BABEL_ENV=webpack webpack --config ./webpack.dev.config.js --colors",
-    "build": "cross-env NODE_ENV=production rollup -c && copyfiles -f src/style.css dist",
+    "build": "cross-env NODE_ENV=production rollup -c && copyfiles -f src/style.css src/reactblockui.d.ts dist",
     "prebuild": "cross-env NODE_ENV=production BABEL_ENV=webpack babel src --out-dir lib && copyfiles -f src/style.css lib && copyfiles -f src/style.css .",
     "create-release": "npm test && sh ./scripts/release",
     "publish-release": "npm test && sh ./scripts/publish"
