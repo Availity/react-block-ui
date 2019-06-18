@@ -1,3 +1,14 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/Availity/react-block-ui/compare/v1.1.3...v1.1.4) (2019-06-18)
+
+
+### Bug Fixes
+
+* **BlockUI:** allow tag to be components ([#27](https://github.com/Availity/react-block-ui/issues/27)) ([7b51125](https://github.com/Availity/react-block-ui/commit/7b51125)), closes [#8](https://github.com/Availity/react-block-ui/issues/8)
+* **focus:** ensure elm can be focused/blurred ([#22](https://github.com/Availity/react-block-ui/issues/22)) ([4ad7107](https://github.com/Availity/react-block-ui/commit/4ad7107))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/Availity/react-block-ui/compare/v1.1.2...v1.1.3) (2018-09-07)
 
