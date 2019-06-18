@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import DefaultLoader from './Loader';
 import safeActiveElement from './safeActiveElement';
@@ -145,36 +145,29 @@ class BlockUi extends Component {
       ...attributes
     } = this.props;
 
-    const classes = blocking ? `block-ui ${className}` : className;
     const renderChilds = !blocking || renderChildren;
-
-    return (
-      <Tag {...attributes} className={classes} aria-busy={blocking} ref={this.setContainer}>
-        {blocking &&
-        <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
+    const child = <Fragment>
+        {blocking && <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
         {renderChilds && children}
         {blocking &&
-        <div className="block-ui-container"
-          tabIndex="0"
-          ref={this.setBlocker}
-          onKeyUp={this.tabbedUpBottom}
-          onKeyDown={this.tabbedDownBottom}
-        >
-          <div className="block-ui-overlay" />
-          <div className="block-ui-message-container"
-            ref={this.setMessageContainer}
-            style={{ top: keepInView ? this.state.top : undefined }}
-          >
-            <div className="block-ui-message">
-              {message}
-              {React.isValidElement(Loader) ? Loader : <Loader />}
+        <div className="block-ui-container" tabIndex="0" ref={this.setBlocker} onKeyUp={this.tabbedUpBottom} onKeyDown={this.tabbedDownBottom}>
+            <div className="block-ui-overlay" />
+            <div className="block-ui-message-container" ref={this.setMessageContainer} style={{ top: keepInView ? this.state.top : undefined }}>
+                <div className="block-ui-message">
+                    {message}
+                    {React.isValidElement(Loader) ? Loader : <Loader />}
+                </div>
             </div>
-          </div>
         </div>
         }
         <span ref={this.setHelper} />
-      </Tag>
-    );
+    </Fragment>;
+
+    if (React.isValidElement(Tag)) {
+        return React.cloneElement(Tag, {...attributes, ...{className: (blocking ? `block-ui ${Tag.props.className}` : Tag.props.className)}, "aria-busy": blocking, ref: this.setContainer}, child);
+    } else {
+        return React.createElement(Tag, {...attributes, ...{className: (blocking ? `block-ui ${className}` : className)}, "aria-busy": blocking, ref: this.setContainer}, child);
+    }
   }
 }
 
