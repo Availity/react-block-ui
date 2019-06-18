@@ -149,7 +149,7 @@ class BlockUi extends Component {
     const renderChilds = !blocking || renderChildren;
 
     return (
-      <Tag {...attributes} className={classes} aria-busy={blocking} ref={this.setContainer}>
+      <Tag {...attributes} className={classes} aria-busy={blocking}>
         {blocking &&
         <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
         {renderChilds && children}
@@ -160,7 +160,7 @@ class BlockUi extends Component {
           onKeyUp={this.tabbedUpBottom}
           onKeyDown={this.tabbedDownBottom}
         >
-          <div className="block-ui-overlay" />
+          <div className="block-ui-overlay" ref={this.setContainer} />
           <div className="block-ui-message-container"
             ref={this.setMessageContainer}
             style={{ top: keepInView ? this.state.top : undefined }}

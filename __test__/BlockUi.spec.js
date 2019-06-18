@@ -269,10 +269,9 @@ describe('BlockUi', function() {
         const wrapper = mount(<BlockUi keepInView><input /></BlockUi>);
         const instance = wrapper.instance();
         sinon.spy(instance, 'setState');
-        sinon.spy(instance.container, 'getBoundingClientRect');
         instance.keepInView();
         expect(instance.setState).to.not.have.been.called;
-        expect(instance.container.getBoundingClientRect).to.not.have.been.called;
+        expect(instance.container).to.not.exist;
       });
     });
     describe('when keepInView prop is falsey', () => {
