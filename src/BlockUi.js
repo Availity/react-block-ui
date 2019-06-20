@@ -196,6 +196,7 @@ BlockUi.propTypes = {
   tag: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
+    PropTypes.shape({ $$typeof: PropTypes.symbol, render: PropTypes.func }),
   ]),
 };
 BlockUi.defaultProps = defaultProps;
