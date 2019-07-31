@@ -1,33 +1,33 @@
-import * as PropTypes from 'prop-types';
+
 
 export type BlockUiProps<T = {}> = React.HTMLAttributes<HTMLElement> & {
-    blocking?: PropTypes.bool,
-    keepInView?: PropTypes.bool,
-    children?: PropTypes.node,
-    renderChildren?: PropTypes.bool, // default to true
-    className?: PropTypes.string,
-    message?: PropTypes.oneOfType,
-    loader?: PropTypes.oneOfType,
-    tag?: PropTypes.oneOfType
+    blocking?: boolean,
+    keepInView?: boolean,
+    children?: any,
+    renderChildren?: boolean, // default to true
+    className?: string,
+    message?: any,
+    loader?: any,
+    tag?: any
 } & T;
 
-declare class BlockUi<T = {[key: string]: any}> extends React.Component<BlockUiProps<T>> {}
-export default BlockUi;
+declare class BlockUi<T = { [key: string]: any }> extends React.Component<BlockUiProps<T>> { }
+
 
 
 export type ReduxBlockUiProps<T = {}> = React.HTMLAttributes<HTMLElement> & {
-    blocking?: PropTypes.bool,
-    keepInView?: PropTypes.bool,
-    children?: PropTypes.node,
-    renderChildren?: PropTypes.bool, // default to true
-    className?: PropTypes.string,
-    message?: PropTypes.oneOfType,
-    loader?: PropTypes.oneOfType,
-    tag?: PropTypes.oneOfType,
-    block: PropTypes.oneOfType,
-    unblock: PropTypes.oneOfType,
-    onChange: PropTypes.func
+    blocking?: boolean,
+    keepInView?: boolean,
+    children?: any,
+    renderChildren?: boolean, // default to true
+    className?: string,
+    message?: any,
+    loader?: any,
+    tag?: any,
+    block: any,
+    unblock: any,
+    onChange: (e: any) => void
 } & T;
 
-declare class ReduxBlockUi<T = {[key: string]: any}> extends React.Component<ReduxBlockUiProps<T>> {}
-export default ReduxBlockUi;
+declare class ReduxBlockUi<T = { [key: string]: any }> extends React.Component<ReduxBlockUiProps<T>> { }
+export { BlockUi, ReduxBlockUi };
