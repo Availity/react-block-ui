@@ -1,6 +1,6 @@
 {
   "name": "react-block-ui",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "author": "Evan Sharp <evan.sharp@availity.com>",
   "description": "Block UI for react",
   "main": "dist/reactblockui.cjs.js",
