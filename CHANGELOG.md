@@ -1,3 +1,13 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/Availity/react-block-ui/compare/1.1.4...1.2.0) (2019-08-02)
+
+
+### Bug Fixes
+
+* **Tag:** account for forwardRef objects ([863b7e4](https://github.com/Availity/react-block-ui/commit/863b7e4))
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/Availity/react-block-ui/compare/v1.1.3...v1.1.4) (2019-06-18)
 
