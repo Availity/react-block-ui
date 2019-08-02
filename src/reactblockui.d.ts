@@ -1,4 +1,4 @@
-
+import * as React from 'react';
 
 export type BlockUiProps<T = {}> = React.HTMLAttributes<HTMLElement> & {
     blocking?: boolean,
@@ -30,4 +30,6 @@ export type ReduxBlockUiProps<T = {}> = React.HTMLAttributes<HTMLElement> & {
 } & T;
 
 declare class ReduxBlockUi<T = { [key: string]: any }> extends React.Component<ReduxBlockUiProps<T>> { }
-export { BlockUi, ReduxBlockUi };
+
+export default BlockUi;
+export { ReduxBlockUi };
