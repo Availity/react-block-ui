@@ -22,6 +22,7 @@
     "build:docs": "cross-env NODE_ENV=production BABEL_ENV=webpack webpack --config ./webpack.dev.config.js --colors",
     "build": "cross-env NODE_ENV=production rollup -c && copyfiles -f src/style.css src/reactblockui.d.ts dist",
     "prebuild": "cross-env NODE_ENV=production BABEL_ENV=webpack babel src --out-dir lib && copyfiles -f src/style.css lib && copyfiles -f src/style.css .",
+    "postbuild": "copyfiles -f lib/redux.js . && copyfiles -f lib/reduxMiddleware.js .",
     "create-release": "npm test && sh ./scripts/release",
     "publish-release": "npm test && sh ./scripts/publish"
   },
