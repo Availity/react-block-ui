@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
-import reduxMiddleware from 'react-block-ui/reduxMiddleware';
+import reduxMiddleware from 'react-block-ui/lib/reduxMiddleware';
 //import reducers from './reducers';
 const reducers = {actions: (state = [], payload) => [payload, ...state]};
 

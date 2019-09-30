@@ -75,6 +75,8 @@ var config = [{
   resolve: {
     extensions: ['', '.js', '.jsx', '.json'],
     alias: {
+      'react-block-ui/lib/redux': path.resolve('./src/redux'),
+      'react-block-ui/lib/reduxMiddleware': path.resolve('./src/reduxMiddleware'),
       'react-block-ui': path.resolve('./src'),
     },
   },
