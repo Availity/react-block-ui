@@ -18,7 +18,7 @@ export default function ReduxBlockUi() {
         registered (see below).
       </p>
       <p>
-        Notice the import is coming from a separate file directly; <code>import ReduxBlockUi from 'react-block-ui/redux'</code>.
+        Notice the import is coming from a separate file directly; <code>import ReduxBlockUi from 'react-block-ui/lib/redux'</code>.
         This is done to keep the standard library light for the developers who only want <code>BlockUi</code> and do
         not use redux and/or do not want <code>ReduxBlockUi</code>.
       </p>
