@@ -8,7 +8,7 @@ export type BlockUiProps<T = {}> = React.HTMLAttributes<HTMLElement> & {
     className?: string,
     message?: string | React.ReactNode,
     loader?: ((...args: any[]) => any) | string | React.ReactNode,
-    tag?: React.ReactType,
+    tag?: React.ReactType | string,
 } & T;
 
 declare class BlockUi<T = { [key: string]: any }> extends React.Component<BlockUiProps<T>> { }
