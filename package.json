@@ -10,7 +10,7 @@
   "types": "dist/reactblockui.d.ts",
   "engines": {
     "node": ">= 5.0.0",
-    "npm": "^3.0.0"
+    "npm": ">= 3.0.0"
   },
   "scripts": {
     "coveralls": "coveralls < ./__test__/coverage/lcov.info",
