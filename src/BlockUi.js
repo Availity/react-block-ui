@@ -63,6 +63,9 @@ class BlockUi extends Component {
 
   setRef(name, ref) {
     this[name] = ref;
+    if (ref && name === 'container') {
+      this.keepInView();
+    }
   }
 
   attachListeners() {
