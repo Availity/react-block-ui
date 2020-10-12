@@ -15,7 +15,7 @@ class ReduxBlockUi extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     register(this.middleware);
   }
 

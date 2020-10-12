@@ -28,7 +28,7 @@ class BlockUi extends Component {
   }
 
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.blocking !== this.props.blocking) {
       if (nextProps.blocking) {
         // blocking started
