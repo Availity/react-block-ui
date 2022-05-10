@@ -27,13 +27,12 @@ class BlockUi extends Component {
     this.state = { top: '50%' };
   }
 
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.blocking !== this.props.blocking) {
-      if (nextProps.blocking) {
+  componentDidUpdate(prevProps, _prevState, _snapshot) {
+    if (prevProps.blocking !== this.props.blocking) {
+      if (prevProps.blocking) {
         // blocking started
         if (this.helper && this.helper.parentNode && this.helper.parentNode.contains
-          && this.helper.parentNode.contains(safeActiveElement())) {
+            && this.helper.parentNode.contains(safeActiveElement())) {
           this.focused = safeActiveElement();
           // https://www.tjvantoll.com/2013/08/30/bugs-with-document-activeelement-in-internet-explorer/#blurring-the-body-switches-windows-in-ie9-and-ie10
           if (this.focused && this.focused !== document.body) {
@@ -51,9 +50,9 @@ class BlockUi extends Component {
         }
       }
     }
-    if (nextProps.keepInView && (nextProps.keepInView !== this.props.keepInView || (nextProps.blocking && nextProps.blocking !== this.props.blocking))) {
+    if (prevProps.keepInView && (prevProps.keepInView !== this.props.keepInView || (prevProps.blocking && prevProps.blocking !== this.props.blocking))) {
       this.attachListeners();
-      this.keepInView(nextProps);
+      this.keepInView(prevProps);
     }
   }
 
