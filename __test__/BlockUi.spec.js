@@ -409,7 +409,7 @@ describe('BlockUi', function() {
         const instance = wrapper.instance();
         instance.helper = { parentNode: { contains: sinon.stub().returns(true) } };
         wrapper.find('input').simulate('click');
-        instance.componentWillReceiveProps({ blocking: true });
+        instance.componentDidUpdate({ blocking: true });
         expect(instance.focused).to.equal(document.activeElement);
         expect(instance.helper.parentNode.contains).to.have.been.called;
       });
@@ -419,7 +419,7 @@ describe('BlockUi', function() {
         const wrapper = shallow(<BlockUi keepInView><input /></BlockUi>);
         const instance = wrapper.instance();
         sinon.spy(window, 'addEventListener');
-        instance.componentWillReceiveProps({ blocking: true, keepInView: true });
+        instance.componentDidUpdate({ blocking: true, keepInView: true });
         expect(window.addEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
         window.addEventListener.restore();
       });
@@ -431,7 +431,7 @@ describe('BlockUi', function() {
       const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
       const instance = wrapper.instance();
       sinon.spy(window, 'addEventListener');
-      instance.componentWillReceiveProps({ blocking: true, keepInView: true });
+      instance.componentDidUpdate({ blocking: true, keepInView: true });
       expect(window.addEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
       window.addEventListener.restore();
     });
@@ -444,7 +444,7 @@ describe('BlockUi', function() {
         const instance = wrapper.instance();
         const spy = sinon.spy();
         instance.focused = { focus: spy };
-        instance.componentWillReceiveProps({ blocking: false });
+        instance.componentDidUpdate({ blocking: false });
         expect(spy).to.have.been.called;
       });
     });
@@ -453,7 +453,7 @@ describe('BlockUi', function() {
         const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
         const instance = wrapper.instance();
         instance.focused = null;
-        expect(instance.componentWillReceiveProps.bind(instance, { blocking: false })).to.not.throw;
+        expect(instance.componentDidUpdate.bind(instance, { blocking: false })).to.not.throw;
       });
     });
     describe('keepInView', () => {
@@ -461,7 +461,7 @@ describe('BlockUi', function() {
         const wrapper = shallow(<BlockUi blocking><input /></BlockUi>);
         const instance = wrapper.instance();
         sinon.spy(window, 'removeEventListener');
-        instance.componentWillReceiveProps({ blocking: false });
+        instance.componentDidUpdate({ blocking: false });
         expect(window.removeEventListener).to.have.been.calledWith('scroll', instance.handleScroll);
         window.removeEventListener.restore();
       });
