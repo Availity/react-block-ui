@@ -1,3 +1,13 @@
+<a name="1.3.4"></a>
+## [1.3.4](https://github.com/Availity/react-block-ui/compare/1.3.3...1.3.4) (2022-12-06)
+
+
+### Bug Fixes
+
+* trigger keepInView when container is set ([#55](https://github.com/Availity/react-block-ui/issues/55)) ([6123a5f](https://github.com/Availity/react-block-ui/commit/6123a5f)), closes [#47](https://github.com/Availity/react-block-ui/issues/47)
+
+
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/Availity/react-block-ui/compare/1.3.2...1.3.3) (2020-03-11)
 
