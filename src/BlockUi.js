@@ -202,6 +202,7 @@ BlockUi.propTypes = {
     PropTypes.func,
     PropTypes.shape({ $$typeof: PropTypes.symbol, render: PropTypes.func }),
   ]),
+  ariaLabel: PropTypes.string,
 };
 BlockUi.defaultProps = defaultProps;
 
