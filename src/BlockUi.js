@@ -150,6 +150,7 @@ class BlockUi extends Component {
 
     const classes = blocking ? `block-ui ${className}` : className;
     const renderChilds = !blocking || renderChildren;
+    const { ariaLabel = 'loading' } = attributes;
 
     return (
       <Tag {...attributes} className={classes} aria-busy={blocking}>
@@ -170,7 +171,7 @@ class BlockUi extends Component {
           >
             <div className="block-ui-message">
               {message}
-              {React.isValidElement(Loader) ? Loader : <Loader />}
+              {React.isValidElement(Loader) ? Loader : <Loader ariaLabel={ariaLabel} />}
             </div>
           </div>
         </div>
