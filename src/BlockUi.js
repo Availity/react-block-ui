@@ -145,12 +145,12 @@ class BlockUi extends Component {
       loader: Loader,
       renderChildren,
       keepInView,
+      ariaLabel = 'loading',
       ...attributes
     } = this.props;
 
     const classes = blocking ? `block-ui ${className}` : className;
     const renderChilds = !blocking || renderChildren;
-    const { ariaLabel = 'loading' } = attributes;
 
     return (
       <Tag {...attributes} className={classes} aria-busy={blocking}>
