@@ -145,7 +145,7 @@ class BlockUi extends Component {
       loader: Loader,
       renderChildren,
       keepInView,
-      ariaLabel,
+      ariaLabel = 'loading',
       ...attributes
     } = this.props;
 
