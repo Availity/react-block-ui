@@ -1,3 +1,8 @@
+<a name="1.3.5"></a>
+## [1.3.5](https://github.com/Availity/react-block-ui/compare/1.3.4...1.3.5) (2022-12-07)
+
+
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/Availity/react-block-ui/compare/1.3.3...1.3.4) (2022-12-06)
 
