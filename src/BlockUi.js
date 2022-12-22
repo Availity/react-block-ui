@@ -157,7 +157,7 @@ class BlockUi extends Component {
         {blocking &&
         <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus}>
           <div className="sr-only">
-            {message || React.isValidElement(Loader) ? Loader : ariaLabel}
+            {message || ariaLabel}
           </div>
         </div>}
         {renderChilds && children}
@@ -174,8 +174,10 @@ class BlockUi extends Component {
             style={{ top: keepInView ? this.state.top : undefined }}
           >
             <div className="block-ui-message">
-              {message}
-              {React.isValidElement(Loader) ? Loader : <Loader ariaLabel={ariaLabel} />}
+              {message || <span className="sr-only">{ariaLabel}</span>}
+              <div aria-hidden>
+                {React.isValidElement(Loader) ? Loader : <Loader/>}
+              </div>
             </div>
           </div>
         </div>
