@@ -155,7 +155,11 @@ class BlockUi extends Component {
     return (
       <Tag {...attributes} className={classes} aria-busy={blocking}>
         {blocking &&
-        <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
+        <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus}>
+          <div className="sr-only">
+            {message || React.isValidElement(Loader) ? Loader : ariaLabel}
+          </div>
+        </div>}
         {renderChilds && children}
         {blocking &&
         <div className="block-ui-container"
