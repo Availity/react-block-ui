@@ -155,7 +155,11 @@ class BlockUi extends Component {
     return (
       <Tag {...attributes} className={classes} aria-busy={blocking}>
         {blocking &&
-        <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus} />}
+        <div tabIndex="0" onKeyUp={this.tabbedUpTop} onKeyDown={this.tabbedDownTop} ref={this.setTopFocus}>
+          <div className="sr-only">
+            {message || ariaLabel}
+          </div>
+        </div>}
         {renderChilds && children}
         {blocking &&
         <div className="block-ui-container"
@@ -170,8 +174,10 @@ class BlockUi extends Component {
             style={{ top: keepInView ? this.state.top : undefined }}
           >
             <div className="block-ui-message">
-              {message}
-              {React.isValidElement(Loader) ? Loader : <Loader ariaLabel={ariaLabel} />}
+              {message || <span className="sr-only">{ariaLabel}</span>}
+              <div aria-hidden>
+                {React.isValidElement(Loader) ? Loader : <Loader/>}
+              </div>
             </div>
           </div>
         </div>

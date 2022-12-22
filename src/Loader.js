@@ -1,17 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-function Loader({ ariaLabel }) {
+
+function Loader() {
   return (
-    <div className="loading-indicator" aria-label={ariaLabel}>
-      <span aria-hidden="true" className="loading-bullet">&bull;</span>{' '}
-      <span aria-hidden="true" className="loading-bullet">&bull;</span>{' '}
-      <span aria-hidden="true" className="loading-bullet">&bull;</span>
+    <div className="loading-indicator">
+      <span className="loading-bullet">&bull;</span>{' '}
+      <span className="loading-bullet">&bull;</span>{' '}
+      <span className="loading-bullet">&bull;</span>
     </div>
   );
-}
-
-Loader.propTypes = {
-  ariaLabel: PropTypes.string
 }
 
 export default Loader;
