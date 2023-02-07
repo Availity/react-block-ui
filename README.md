@@ -1,3 +1,5 @@
+> Deprecation Notice: This package is no longer supported. Please switch to [@availity/block-ui](https://www.npmjs.com/package/@availity/block-ui).
+
 [![npm version](https://badge.fury.io/js/react-block-ui.svg)](https://badge.fury.io/js/react-block-ui) [![Build Status](https://travis-ci.org/Availity/react-block-ui.svg?branch=master)](https://travis-ci.org/Availity/react-block-ui) [![Coverage Status](https://coveralls.io/repos/github/Availity/react-block-ui/badge.svg?branch=master)](https://coveralls.io/github/Availity/react-block-ui?branch=master)
 # react-block-ui
 Easy way to block the user from interacting with your UI.
